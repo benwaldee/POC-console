@@ -1,0 +1,31 @@
+.HomePageBox_outer-wrap {
+    background-color: #ffffff;
+    border: 1px solid #cecece;
+    margin-left: 28.6px;
+    margin-right: 28.6px;
+    margin-top: 40px;
+    height: 275px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.HomePageBox_title {
+    color: #477aae;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 1px #fff;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.HomePageBox_text {
+    font-size: 11px !important;
+    text-shadow: 0 1px #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 15px;
+    color: #888888;
+}

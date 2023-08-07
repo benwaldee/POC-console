@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../context/GeneralContext';
-import "./CSS/HomePage.css"
-import Navbar from './Navbar';
-import Footer from './Footer';
-import HomePageBox from './HomePageBox';
+import "./CSS/HomePageBox.css"
 
-function HomePage() {
+function HomePageBox() {
     //STATE VARS
     //-----------------------------------------------------------------------------------------------------------
     //USE EFFECTS
@@ -15,12 +12,13 @@ function HomePage() {
     //-----------------------------------------------------------------------------------------------------------
     return (
         <>
-            <Navbar />
-            <HomePageBox />
-            <Footer />
+            <div className='HomePageBox_outer-wrap'>
+                <div className='HomePageBox_title' >AUTOTRAN ADMINISTRATIVE SUITE</div>
+                <div className='HomePageBox_text'>PLEASE USE THE NAVIGATION LINKS AT THE TOP TO ACCESS DIFFERENT SECTIONS OF THE ADMINISTRATION PANEL.</div>
+            </div>
         </>
     );
 
 }
 
-export default HomePage;
+export default HomePageBox;
