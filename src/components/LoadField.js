@@ -113,19 +113,19 @@ function LoadField() {
 
         delete editLoad.flags
 
-        //hit save load with axios
-        //THEN hit flag load with axios
-        // try {
+        // hit save load with axios
+        // THEN hit flag load with axios
+        try {
 
-        //     await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/save_load', editLoad)
-        //     await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/set_load_flags', editLoadFlag)
+            await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/save_load', editLoad)
+            await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/set_load_flags', editLoadFlag)
 
-        // } catch (error) {
-        //     console.error("error w loads", error)
-        // }
+        } catch (error) {
+            console.error("error w loads", error)
+        }
 
         // console.log(editLoad)
-        console.log(editLoadFlag)
+        // console.log(editLoadFlag)
 
 
 
