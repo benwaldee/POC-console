@@ -165,12 +165,12 @@ function LoadField() {
                                 value={tabletDownloadStatus}
                                 onChange={(e) => setTabletDownloadStatus(e.target.value)}
                             >
-                                {tabletDownloadStatus === 0 && <option value={0} selected>0</option>}
-                                {tabletDownloadStatus !== 0 && <option value={0} >0</option>}
-                                {tabletDownloadStatus === 1 && <option value={1} selected>1</option>}
-                                {tabletDownloadStatus !== 1 && <option value={1} >1</option>}
-                                {tabletDownloadStatus === 2 && <option value={2} selected>2</option>}
-                                {tabletDownloadStatus !== 2 && <option value={2} >2</option>}
+                                {tabletDownloadStatus === 0 && <option value={0} selected>new</option>}
+                                {tabletDownloadStatus !== 0 && <option value={0} >new</option>}
+                                {tabletDownloadStatus === 1 && <option value={1} selected>ready</option>}
+                                {tabletDownloadStatus !== 1 && <option value={1} >ready</option>}
+                                {tabletDownloadStatus === 2 && <option value={2} selected>downloaded</option>}
+                                {tabletDownloadStatus !== 2 && <option value={2} >downloaded</option>}
                             </select>
                             <label htmlFor="preloadsReady">preloadsReady</label>
                             <input
@@ -243,7 +243,7 @@ function LoadField() {
                             <input
                                 id="loadNum"
                                 className='LoadField-edit-input'
-                                type='text'
+                                type='number'
                                 value={loadNum}
                                 onChange={(e) => setLoadNum(e.target.value)}
                             ></input>
@@ -251,7 +251,7 @@ function LoadField() {
                             <input
                                 id="truckNum"
                                 className='LoadField-edit-input'
-                                type='text'
+                                type='number'
                                 value={truckNum}
                                 onChange={(e) => setTruckNum(e.target.value)}
                             ></input>
@@ -259,7 +259,7 @@ function LoadField() {
                             <input
                                 id="trailerNum"
                                 className='LoadField-edit-input'
-                                type='text'
+                                type='number'
                                 value={trailerNum}
                                 onChange={(e) => setTrailerNum(e.target.value)}
                             ></input>
@@ -267,7 +267,7 @@ function LoadField() {
                             <input
                                 id="userId"
                                 className='LoadField-edit-input'
-                                type='text'
+                                type='number'
                                 value={userId}
                                 onChange={(e) => setUserId(e.target.value)}
                             ></input>
@@ -291,7 +291,7 @@ function LoadField() {
                             <input
                                 id="nextLoadNum"
                                 className='LoadField-edit-input'
-                                type='text'
+                                type='number'
                                 value={nextLoadNum}
                                 onChange={(e) => setNextLoadNum(e.target.value)}
                             ></input>
@@ -299,7 +299,7 @@ function LoadField() {
                             <input
                                 id="prevLoadNum"
                                 className='LoadField-edit-input'
-                                type='text'
+                                type='number'
                                 value={prevLoadNum}
                                 onChange={(e) => setPrevLoadNum(e.target.value)}
                             ></input>
@@ -323,9 +323,9 @@ function LoadField() {
                             <input
                                 id="shuttleLoad"
                                 className='LoadField-edit-input'
-                                type='text'
-                                value={shuttleLoad}
-                                onChange={(e) => setShuttleLoad(e.target.value)}
+                                type='checkbox'
+                                checked={shuttleLoad}
+                                onChange={() => setShuttleLoad(!shuttleLoad)}
                             ></input>
                             <label htmlFor="shuttleMoveId">shuttleMoveId</label>
                             <input
