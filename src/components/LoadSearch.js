@@ -8,12 +8,12 @@ function LoadSearch() {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
-    const [loadArr, setLoadArr] = useState(null)
-    const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("")
     const [matchedLoads, setMatchedLoads] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
+
     const { setClickedLoad } = useGeneralContext()
+    const { loadArr, setLoadArr } = useGeneralContext()
 
     //USE EFFECTS
     //------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,6 @@ function LoadSearch() {
 
                 const loads = await axios.get('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/all')
                 setLoadArr(loads.data.loadArr)
-                setLoading(true)
 
             } catch (error) {
                 console.error("error w loads", error)
@@ -36,7 +35,7 @@ function LoadSearch() {
     }, [])
 
     useEffect(() => {
-        loading && displaySearchResults && searchLoads(search)
+        displaySearchResults && searchLoads(search)
     }, [displaySearchResults])
 
     //FUNCTIONS
@@ -48,7 +47,6 @@ function LoadSearch() {
 
         if (searchStr === "%") {
             setMatchedLoads(loadArr)
-            setDisplaySearchResults(true)
             return
         }
 
@@ -62,7 +60,6 @@ function LoadSearch() {
         }
 
         setMatchedLoads(tempMatchedLoads)
-        setDisplaySearchResults(true)
         return
     }
 
@@ -75,34 +72,64 @@ function LoadSearch() {
 
     return (
         <>
-            <input
-                type='text'
-                value={search}
-                onChange={(e) => {
-                    setDisplaySearchResults(false)
-                    setSearch(e.target.value)
-                }}
-                placeholder='Load Number'
-                maxLength={50}
-                onKeyDown={handleKeyPress}
-            ></input>
-            <button
-                onClick={() => {
-                    setDisplaySearchResults(true)
-                }}
-            >Search loads</button>
-            <div className='LoadSearch_search-results-wrap'>
-                {loading && search && displaySearchResults && matchedLoads.map((load) =>
-                    <div
-                        className='LoadSearch_one-load'
-                        key={load.data.loadNum}
-                        onClick={() => {
-                            setClickedLoad(load)
-                        }}
-                    > {load.data.loadNum}</div>
-
-                )}
+            <h1 className='LoadSearch_title'>LOADS</h1>
+            <div className='LoadSearch_search-box'>
+                <label className="LoadSearch_search-label" for="load#">Load # :</label>
+                <input
+                    id='load#'
+                    className='LoadSearch_search-field'
+                    type='text'
+                    value={search}
+                    onChange={(e) => {
+                        setDisplaySearchResults(false)
+                        setSearch(e.target.value)
+                    }}
+                    placeholder=''
+                    maxLength={50}
+                    onKeyDown={handleKeyPress}
+                ></input>
+                <button
+                    className='LoadSearch_search-button'
+                    onClick={() => {
+                        setDisplaySearchResults(true)
+                    }}
+                >SEARCH</button>
             </div>
+            {displaySearchResults && loadArr &&
+                <div className='LoadSearch_search-results-wrap-table'>
+                    <div className='LoadSearch_flex'>
+                        <div className='LoadSearch_table-header'>
+                            <div className='LoadSearch_table-header-val'>Load</div>
+                            <div className='LoadSearch_table-header-val'>Load Type</div>
+                            <div className='LoadSearch_table-header-val'>Truck</div>
+                            <div className='LoadSearch_table-header-val'>Driver</div>
+                        </div>
+                        {matchedLoads.map((load, index) =>
+                            <div
+                                className={`LoadSearch_table-entry LoadSearch_table-entry-last-${matchedLoads.length - 1 === index}`}
+                                key={load.data.loadNum}
+                                onClick={() => {
+                                    setClickedLoad(load)
+                                }}
+                            >
+                                <div className='LoadSearch_table-entry-val '>{load.data.loadNum}</div>
+                                <div className='LoadSearch_table-entry-val'>{load.data.loadType}</div>
+                                <div className='LoadSearch_table-entry-val'>{load.data.truckNum}</div>
+                                <div className='LoadSearch_table-entry-val'>{load.data.userId}</div>
+                            </div>
+
+                        )}
+
+                    </div>
+                </div>
+            }
+            {
+                !matchedLoads?.length &&
+                <div className='LoadSearch_search-results-wrap'>
+                    <div className='LoadSearch_search-results-empty'>No loads match the current search criteria</div>
+                </div>
+            }
+
 
 
 
