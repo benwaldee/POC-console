@@ -46,6 +46,7 @@
     display: flex;
     padding-left: 40px;
     background-color: #555555;
+    padding-bottom: 1px;
 }
 
 .Navbar_bottom-link {
