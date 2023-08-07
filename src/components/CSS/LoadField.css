@@ -1,0 +1,13 @@
+.LoadField-editForm-data-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.LoadField-editForm-flags-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.LoadField-edit-input {
+    width: 200px;
+}

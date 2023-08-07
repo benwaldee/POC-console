@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../context/GeneralContext';
-
+import "./CSS/LoadSearch.css"
 
 
 function LoadSearch() {
 
     //STATE VARS
-    //-------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------
     const [loadArr, setLoadArr] = useState(null)
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("")
@@ -16,7 +16,7 @@ function LoadSearch() {
     const { setClickedLoad } = useGeneralContext()
 
     //USE EFFECTS
-    //--------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------
     useEffect(() => {
 
         const fetchLoads = async () => {
@@ -68,8 +68,6 @@ function LoadSearch() {
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            // Call the function you want to trigger on Enter key press
-            // For example, perform a search here
             setDisplaySearchResults(true)
         }
     };
@@ -92,7 +90,7 @@ function LoadSearch() {
                 onClick={() => {
                     setDisplaySearchResults(true)
                 }}
-            >Search</button>
+            >Search loads</button>
             <div className='LoadSearch_search-results-wrap'>
                 {loading && search && displaySearchResults && matchedLoads.map((load) =>
                     <div

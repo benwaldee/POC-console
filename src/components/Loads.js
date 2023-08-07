@@ -6,7 +6,6 @@ import "./CSS/Loads.css"
 function Loads() {
 
 
-
     return (
         <>
             <div className="Loads_outer-wrap">
