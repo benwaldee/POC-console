@@ -1,34 +1,34 @@
-.LoadField-editForm-data-wrap {
+.Field-editForm-data-wrap {
     display: flex;
     flex-direction: column;
 }
 
-.LoadField-editForm-flags-wrap {
+.Field-editForm-flags-wrap {
     display: flex;
     flex-direction: column;
 }
 
-.LoadField-edit-input {
+.Field-edit-input {
     width: 200px;
 }
 
-.LoadField_outer-wrap {
+.Field_outer-wrap {
     width: fit-content;
     height: fit-content;
     padding: 20px;
     margin: 5px;
     background-color: #ffffff;
     border: 1px solid #cecece;
-    margin-top: 65px;
+    margin-top: 63px;
 }
 
-.LoadField_JSON-pre {
+.Field_JSON-pre {
     background-color: #ececec;
     padding: 10px;
     border-radius: 3px;
 }
 
-.LoadField_edit-label {
+.Field_edit-label {
     color: #444444;
     font-size: 14px;
     align-self: center;
@@ -36,19 +36,19 @@
     margin-right: 10px;
 }
 
-.LoadField_editForm-flags-wrap {
+.Field_editForm-flags-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
 }
 
-.LoadField_editForm-data-wrap {
+.Field_editForm-data-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
 }
 
-.LoadField_edit-input {
+.Field_edit-input {
     padding: 8px 6px !important;
     font-size: 12px;
     color: #444444;
@@ -60,27 +60,27 @@
     margin-bottom: 5px;
 }
 
-.LoadField_edit-check {
+.Field_edit-check {
     justify-self: start;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.LoadField_edit-select {
+.Field_edit-select {
     justify-self: start;
     margin-top: 5px;
     margin-bottom: 5px
 }
 
-.LoadField_editForm-flags-subtitle,
-.LoadField_editForm-data-subtitle {
+.Field_editForm-flags-subtitle,
+.Field_editForm-data-subtitle {
     margin-top: 10px;
     margin-bottom: 20px;
     font-weight: bold;
     border-bottom: 1px solid #c2c2c2;
 }
 
-.LoadField_edit_save {
+.Field_edit_save {
     height: 40px;
     font-size: 12px;
     padding: 15px;
@@ -101,11 +101,11 @@
     margin-left: 67px;
 }
 
-.LoadField_edit_save:hover {
+.Field_edit_save:hover {
     background-color: #696969;
 }
 
-.LoadField_display-button {
+.Field_display-button {
     height: 30px;
     font-size: 12px;
     padding: 15px;
@@ -123,33 +123,33 @@
     margin-right: 10px;
 }
 
-.LoadField_button-wrap {
+.Field_button-wrap {
     display: flex;
     margin-bottom: 25px;
 }
 
-.LoadField_display-button:hover {
+.Field_display-button:hover {
     background-color: #696969;
 }
 
-.LoadField_table-wrap {
+.Field_table-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
 
-.LoadField_table-label {
+.Field_table-label {
     font-weight: bold;
     color: #444444d3;
     font-size: 15px;
 }
 
-.LoadField_table-item {
+.Field_table-item {
     color: #444444;
     font-size: 15px;
 }
 
-.LoadField_table-title {
+.Field_table-title {
     margin-bottom: 20px;
     padding-bottom: 5px;
     font-size: 17px;

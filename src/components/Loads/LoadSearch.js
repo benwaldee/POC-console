@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
-import "../CSS/LoadSearch.css"
+import "../CSS/Search.css"
 
 
 function LoadSearch() {
@@ -72,12 +72,12 @@ function LoadSearch() {
 
     return (
         <>
-            <h1 className='LoadSearch_title'>LOADS</h1>
-            <div className='LoadSearch_search-box'>
-                <label className="LoadSearch_search-label" for="load#">Load # :</label>
+            <h1 className='Search_title'>LOADS</h1>
+            <div className='Search_search-box'>
+                <label className="Search_search-label" for="load#">Load # :</label>
                 <input
                     id='load#'
-                    className='LoadSearch_search-field'
+                    className='Search_search-field'
                     type='text'
                     value={search}
                     onChange={(e) => {
@@ -89,33 +89,33 @@ function LoadSearch() {
                     onKeyDown={handleKeyPress}
                 ></input>
                 <button
-                    className='LoadSearch_search-button'
+                    className='Search_search-button'
                     onClick={() => {
                         setDisplaySearchResults(true)
                     }}
                 >SEARCH</button>
             </div>
             {displaySearchResults && loadArr &&
-                <div className='LoadSearch_search-results-wrap-table'>
-                    <div className='LoadSearch_flex'>
-                        <div className='LoadSearch_table-header'>
-                            <div className='LoadSearch_table-header-val'>Load</div>
-                            <div className='LoadSearch_table-header-val'>Load Type</div>
-                            <div className='LoadSearch_table-header-val'>Truck</div>
-                            <div className='LoadSearch_table-header-val'>Driver</div>
+                <div className='Search_search-results-wrap-table'>
+                    <div className='Search_flex'>
+                        <div className='Search_table-header'>
+                            <div className='Search_table-header-val'>Load</div>
+                            <div className='Search_table-header-val'>Load Type</div>
+                            <div className='Search_table-header-val'>Truck</div>
+                            <div className='Search_table-header-val'>Driver</div>
                         </div>
                         {matchedLoads?.map((load, index) =>
                             <div
-                                className={`LoadSearch_table-entry LoadSearch_table-entry-last-${matchedLoads.length - 1 === index}`}
+                                className={`Search_table-entry Search_table-entry-last-${matchedLoads.length - 1 === index}`}
                                 key={load.data.loadNum}
                                 onClick={() => {
                                     setClickedLoad(load)
                                 }}
                             >
-                                <div className='LoadSearch_table-entry-val '>{load.data.loadNum}</div>
-                                <div className='LoadSearch_table-entry-val'>{load.data.loadType}</div>
-                                <div className='LoadSearch_table-entry-val'>{load.data.truckNum}</div>
-                                <div className='LoadSearch_table-entry-val'>{load.data.userId}</div>
+                                <div className='Search_table-entry-val '>{load.data.loadNum}</div>
+                                <div className='Search_table-entry-val'>{load.data.loadType}</div>
+                                <div className='Search_table-entry-val'>{load.data.truckNum}</div>
+                                <div className='Search_table-entry-val'>{load.data.userId}</div>
                             </div>
 
                         )}
@@ -125,8 +125,8 @@ function LoadSearch() {
             }
             {
                 !matchedLoads?.length &&
-                <div className='LoadSearch_search-results-wrap'>
-                    <div className='LoadSearch_search-results-empty'>No loads match the current search criteria</div>
+                <div className='Search_search-results-wrap'>
+                    <div className='Search_search-results-empty'>No loads match the current search criteria</div>
                 </div>
             }
 
