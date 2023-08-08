@@ -104,7 +104,7 @@ function LoadSearch() {
                             <div className='LoadSearch_table-header-val'>Truck</div>
                             <div className='LoadSearch_table-header-val'>Driver</div>
                         </div>
-                        {matchedLoads.map((load, index) =>
+                        {matchedLoads?.map((load, index) =>
                             <div
                                 className={`LoadSearch_table-entry LoadSearch_table-entry-last-${matchedLoads.length - 1 === index}`}
                                 key={load.data.loadNum}

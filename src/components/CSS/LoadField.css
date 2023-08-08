@@ -31,17 +31,21 @@
 .LoadField_edit-label {
     color: #444444;
     font-size: 14px;
-
+    align-self: center;
+    font-weight: lighter;
+    margin-right: 10px;
 }
 
 .LoadField_editForm-flags-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
 }
 
 .LoadField_editForm-data-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
 }
 
 .LoadField_edit-input {
@@ -52,4 +56,103 @@
     border: solid 1px #d5d5d5;
     outline: none;
     width: 200px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.LoadField_edit-check {
+    justify-self: start;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.LoadField_edit-select {
+    justify-self: start;
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+
+.LoadField_editForm-flags-subtitle,
+.LoadField_editForm-data-subtitle {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #c2c2c2;
+}
+
+.LoadField_edit_save {
+    height: 40px;
+    font-size: 12px;
+    padding: 15px;
+    width: 285px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #525252;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px;
+    align-self: center;
+    justify-self: center;
+    margin-left: 67px;
+}
+
+.LoadField_edit_save:hover {
+    background-color: #696969;
+}
+
+.LoadField_display-button {
+    height: 30px;
+    font-size: 12px;
+    padding: 15px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #525252;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-right: 10px;
+}
+
+.LoadField_button-wrap {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.LoadField_display-button:hover {
+    background-color: #696969;
+}
+
+.LoadField_table-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.LoadField_table-label {
+    font-weight: bold;
+    color: #444444d3;
+    font-size: 15px;
+}
+
+.LoadField_table-item {
+    color: #444444;
+    font-size: 15px;
+}
+
+.LoadField_table-title {
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    font-size: 17px;
+    font-weight: bold;
+    border-bottom: 1px solid #c2c2c2;
 }

@@ -7,7 +7,7 @@ function LoadField() {
 
     //STATE VARS
     //----------------------------------------------------------------------------------------
-    const [display, setDisplay] = useState("JSON")
+    const [display, setDisplay] = useState("TABLE")
     const { clickedLoad } = useGeneralContext()
 
     //form vars
@@ -132,23 +132,34 @@ function LoadField() {
         return
     }
 
+    const returnStatus = (num) => {
+        if (num == 0) {
+            return "new"
+        } else if (num == 1) {
+            return "ready"
+        } else {
+            return "downloaded"
+        }
+    }
+
 
 
     return (
         <div className='LoadField_outer-wrap'>
-
-            <button
-                className="LoadField_-display-button"
-                onClick={() => setDisplay("TABLE")}
-            >Table</button>
-            <button
-                className="LoadField_-display-button"
-                onClick={() => setDisplay("JSON")}
-            >JSON</button>
-            <button
-                className="LoadField_-display-button"
-                onClick={() => setDisplay("EDIT")}
-            >Edit</button>
+            <div className="LoadField_button-wrap">
+                <button
+                    className="LoadField_display-button"
+                    onClick={() => setDisplay("TABLE")}
+                >Table</button>
+                <button
+                    className="LoadField_display-button"
+                    onClick={() => setDisplay("JSON")}
+                >JSON</button>
+                <button
+                    className="LoadField_display-button"
+                    onClick={() => setDisplay("EDIT")}
+                >Edit</button>
+            </div>
             {display === "JSON" && clickedLoad &&
                 <pre className="LoadField_JSON-pre">
                     {JSON.stringify(clickedLoad, null, 2)}
@@ -158,7 +169,6 @@ function LoadField() {
                 <div className="LoadField_editForm-outer-wrap">
 
                     <form className='LoadField_editForm' onSubmit={handleSubmit}>
-                        <div className='LoadField_editForm-title'>Edit load</div>
                         <div className='LoadField_editForm-flags-subtitle'>Flags</div>
                         <div className='LoadField_editForm-flags-wrap'>
                             <label className='LoadField_edit-label' htmlFor="tabletDownloadStatus">tabletDownloadStatus</label>
@@ -241,7 +251,7 @@ function LoadField() {
                                 onChange={(e) => setTabletDownloadTime(e.target.value)}
                             ></input>
                         </div>
-                        <div className='LoadField_editForm-data'>Data</div>
+                        <div className='LoadField_editForm-data-subtitle'>Data</div>
                         <div className='LoadField_editForm-data-wrap'>
                             <label className='LoadField_edit-label' htmlFor="loadNum">loadNum</label>
                             <input
@@ -363,15 +373,43 @@ function LoadField() {
                                 value={nextDispatch}
                                 onChange={(e) => setNextDispatch(e.target.value)}
                             ></input>
-                            <button
-                                type='submit'
-                            > Save changes</button>
+
                         </div>
+                        <button
+                            className='LoadField_edit_save'
+                            type='submit'
+                        > Save changes</button>
                     </form>
                 </div>
             }
+            {display === "TABLE" && clickedLoad &&
+                <><div className='LoadField_table-title'>LOAD INFO</div>
+                    <div className='LoadField_table-wrap'>
+                        <div className='LoadField_table-label'>ID</div>
+                        <div className='LoadField_table-item'>{clickedLoad._id}</div>
+                        <div className='LoadField_table-label'>LOAD #</div>
+                        <div className='LoadField_table-item'>{clickedLoad.data.loadNum}</div>
+                        <div className='LoadField_table-label'>LOAD TYPE</div>
+                        <div className='LoadField_table-item'>{clickedLoad.data.loadType}</div>
+                        <div className='LoadField_table-label'>TRUCK</div>
+                        <div className='LoadField_table-item'>{clickedLoad.data.truckNum}</div>
+                        <div className='LoadField_table-label'>DRIVER</div>
+                        <div className='LoadField_table-item'>{clickedLoad.data.userId}</div>
+                        <div className='LoadField_table-label'>SHIPPING DATE</div>
+                        <div className='LoadField_table-item'>{clickedLoad.data.shipDate}</div>
+                        <div className='LoadField_table-label'>DELIVERY DATE</div>
+                        <div className='LoadField_table-item'>{clickedLoad.data.estDeliverdate}</div>
+                        <div className='LoadField_table-label'>DOWNLOAD STATUS</div>
+                        <div className='LoadField_table-item'>{returnStatus(clickedLoad.flags.tabletDownloadStatus)}</div>
+                        <div className='LoadField_table-label'>CREATED</div>
+                        <div className='LoadField_table-item'>{clickedLoad.flags.uploadTime}</div>
+                        <div className='LoadField_table-label'>MODIFIED</div>
+                        <div className='LoadField_table-item'>{clickedLoad.flags.updateTime}</div>
 
-        </div>
+                    </div>
+                </>
+            }
+        </div >
     );
 
 }
