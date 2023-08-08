@@ -1,9 +1,9 @@
 import LoadField from "./LoadField";
 import LoadSearch from "./LoadSearch";
-import "./CSS/Loads.css"
-import Navbar from './Navbar';
-import Footer from './Footer';
-import { useGeneralContext } from '../context/GeneralContext';
+import "../CSS/Loads.css"
+import Navbar from '../Navbar';
+import Footer from '../Footer';
+import { useGeneralContext } from '../../context/GeneralContext';
 import { useEffect } from "react";
 
 function Loads() {

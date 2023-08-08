@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useGeneralContext } from '../context/GeneralContext';
-import "./CSS/LoadField.css"
+import { useGeneralContext } from '../../context/GeneralContext';
+import "../CSS/LoadField.css"
 
 function LoadField() {
 
