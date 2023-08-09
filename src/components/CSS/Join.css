@@ -1,25 +1,25 @@
-.Loads_outer-wrap {
+.Join_outer-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-.Loads_LoadSearch-wrap {
+.Join_Search-wrap {
     display: flex;
     flex-direction: column;
     margin-right: 50px;
 }
 
-.Loads_LoadField-wrap {
+.Join_Field-wrap {
     margin-right: 50px;
 }
 
-@media (max-width: 900px) {
-    .Loads_outer-wrap {
+@media (max-width: 1000px) {
+    .Join_outer-wrap {
         display: flex;
         flex-direction: column;
     }
 
-    .Loads_LoadField-wrap {
+    .Join_Field-wrap {
         margin-left: 24px;
     }
 }

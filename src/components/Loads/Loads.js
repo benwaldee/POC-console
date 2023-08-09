@@ -1,6 +1,6 @@
 import LoadField from "./LoadField";
 import LoadSearch from "./LoadSearch";
-import "../CSS/Loads.css"
+import "../CSS/Join.css"
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { useGeneralContext } from '../../context/GeneralContext';
@@ -19,9 +19,9 @@ function Loads() {
     return (
         <>
             <Navbar />
-            <div className="Loads_outer-wrap">
-                <div className="Loads_LoadSearch-wrap">  <LoadSearch /></div>
-                <div className="Loads_LoadField-wrap">  <LoadField /></div>
+            <div className="Join_outer-wrap">
+                <div className="Join_Search-wrap">  <LoadSearch /></div>
+                <div className="Join_Field-wrap">  <LoadField /></div>
             </div>
             <Footer />
         </>

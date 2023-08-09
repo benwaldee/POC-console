@@ -1,6 +1,6 @@
 import UserField from "./UserField";
 import UserSearch from "./UserSearch";
-import "../CSS/Users.css"
+import "../CSS/Join.css"
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { useGeneralContext } from '../../context/GeneralContext';
@@ -12,9 +12,9 @@ function Users() {
     return (
         <>
             <Navbar />
-            <div className="Users_outer-wrap">
-                {/* <div className="Users_UserSearch-wrap">  <UserSearch /></div>
-                <div className="Users_UserField-wrap">  <UserField /></div> */}
+            <div className="Join_outer-wrap">
+                <div className="Join_Search-wrap">  <UserSearch /></div>
+                <div className="Join_Field-wrap">  <UserField /></div>
             </div>
             <Footer />
         </>

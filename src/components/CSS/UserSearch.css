@@ -1,0 +1,35 @@
+.UserSearch_table-header,
+.UserSearch_table-entry {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid #cecece;
+    padding: 6px;
+}
+
+.UserSearch_table-header {
+    background-color: #d8d8d8;
+}
+
+.UserSearch_table-header-val {
+    color: #444444;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.UserSearch_table-entry-val {
+    color: #444444;
+    font-size: 14px;
+}
+
+.UserSearch_table-entry-last-true {
+    border: none;
+}
+
+.UserSearch_table-entry {
+    cursor: pointer;
+}
+
+.UserSearch_table-entry:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+}

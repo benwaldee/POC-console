@@ -8,12 +8,14 @@ export function GeneralProvider({ children }) {
     const generalRef = useRef();
     const [value, setValue] = useState();
 
-
-    //used in loads to set correct load form
     const [clickedLoad, setClickedLoad] = useState(null);
-
-    //grab all loads early
     const [loadArr, setLoadArr] = useState(null)
+
+    const [userArr, setUserArr] = useState(null)
+    const [clickedUser, setClickedUser] = useState(null);
+
+    const [clickedDelivery, setClickedDelivery] = useState(null);
+    // const [deliveryArr, setDeliveryArr] = useState(null)
 
 
     useEffect(() => {
@@ -24,7 +26,11 @@ export function GeneralProvider({ children }) {
         <>
             <GeneralContext.Provider value={{
                 clickedLoad, setClickedLoad,
-                loadArr, setLoadArr
+                loadArr, setLoadArr,
+                userArr, setUserArr,
+                clickedUser, setClickedUser,
+                clickedDelivery, setClickedDelivery
+                // deliveryArr, setDeliveryArr
             }}>
                 {children}
             </GeneralContext.Provider>

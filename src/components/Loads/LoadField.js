@@ -383,7 +383,7 @@ function LoadField() {
                 </div>
             }
             {display === "TABLE" && clickedLoad &&
-                <><div className='Field_table-title'>LOAD INFO</div>
+                <><div className='Field_table-title'>Load Info</div>
                     <div className='Field_table-wrap'>
                         <div className='Field_table-label'>ID</div>
                         <div className='Field_table-item'>{clickedLoad._id}</div>

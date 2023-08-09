@@ -10,6 +10,7 @@ function HomePage() {
     //STATE VARS
     //-----------------------------------------------------------------------------------------------------------
     const { setLoadArr } = useGeneralContext()
+    const { setUserArr } = useGeneralContext()
     //USE EFFECTS
     //-----------------------------------------------------------------------------------------------------------
     useEffect(() => {
@@ -26,6 +27,19 @@ function HomePage() {
         }
 
         fetchLoads()
+
+        const fetchUsers = async () => {
+            try {
+
+                const users = await axios.get('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/users')
+                setUserArr(users.data.userArr)
+
+            } catch (error) {
+                console.error("error w users", error)
+            }
+        }
+
+        fetchUsers()
 
     }, [])
     //FUNCTIONS
