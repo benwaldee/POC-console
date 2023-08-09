@@ -80,25 +80,27 @@ function DeliverySearch() {
     //search function that will return everything with the % keyword
     // will match a search if the load number begins with the search input
     const searchLoads = (searchStr) => {
-        const tempDeliveryMap = JSON.parse(JSON.stringify(deliveryMap))
-        let tempMatchedDeliveries = []
+        if (deliveryMap) {
+            const tempDeliveryMap = JSON.parse(JSON.stringify(deliveryMap))
+            let tempMatchedDeliveries = []
 
-        if (searchStr === "%") {
-            for (let loadNum in tempDeliveryMap) {
-                tempMatchedDeliveries = [...tempMatchedDeliveries, ...tempDeliveryMap[loadNum]]
+            if (searchStr === "%") {
+                for (let loadNum in tempDeliveryMap) {
+                    tempMatchedDeliveries = [...tempMatchedDeliveries, ...tempDeliveryMap[loadNum]]
+                }
+                setMatchedDeliveries(tempMatchedDeliveries)
+                return
             }
+
+            for (let loadNum in tempDeliveryMap) {
+                if (String(loadNum).startsWith(searchStr)) {
+                    tempMatchedDeliveries = [...tempMatchedDeliveries, ...tempDeliveryMap[loadNum]]
+                }
+            }
+
             setMatchedDeliveries(tempMatchedDeliveries)
             return
-        }
-
-        for (let loadNum in tempDeliveryMap) {
-            if (String(loadNum).startsWith(searchStr)) {
-                tempMatchedDeliveries = [...tempMatchedDeliveries, ...tempDeliveryMap[loadNum]]
-            }
-        }
-
-        setMatchedDeliveries(tempMatchedDeliveries)
-        return
+        } else { return }
     }
 
     const handleKeyPress = (e) => {

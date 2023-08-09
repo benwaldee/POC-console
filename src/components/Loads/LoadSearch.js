@@ -45,22 +45,24 @@ function LoadSearch() {
     // will match a search if the load number begins with the search input
     const searchLoads = (searchStr) => {
 
-        if (searchStr === "%") {
-            setMatchedLoads(loadArr)
-            return
-        }
-
-        let tempMatchedLoads = []
-
-        for (let load of loadArr) {
-            const num = String(load.data.loadNum)
-            if (num.startsWith(searchStr)) {
-                tempMatchedLoads.push(load)
+        if (loadArr) {
+            if (searchStr === "%") {
+                setMatchedLoads(loadArr)
+                return
             }
-        }
 
-        setMatchedLoads(tempMatchedLoads)
-        return
+            let tempMatchedLoads = []
+
+            for (let load of loadArr) {
+                const num = String(load.data.loadNum)
+                if (num.startsWith(searchStr)) {
+                    tempMatchedLoads.push(load)
+                }
+            }
+
+            setMatchedLoads(tempMatchedLoads)
+            return
+        } else { return }
     }
 
     const handleKeyPress = (e) => {

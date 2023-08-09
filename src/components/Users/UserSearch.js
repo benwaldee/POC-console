@@ -45,23 +45,24 @@ function UserSearch() {
     //search function that will return everything with the % keyword
     // will match a search if the load number begins with the search input
     const searchUsers = (searchStr) => {
-
-        if (searchStr === "%") {
-            setMatchedUsers(userArr)
-            return
-        }
-
-        let tempMatchedUsers = []
-
-        for (let user of userArr) {
-            const num = String(user.userId)
-            if (num.startsWith(searchStr)) {
-                tempMatchedUsers.push(user)
+        if (userArr) {
+            if (searchStr === "%") {
+                setMatchedUsers(userArr)
+                return
             }
-        }
 
-        setMatchedUsers(tempMatchedUsers)
-        return
+            let tempMatchedUsers = []
+
+            for (let user of userArr) {
+                const num = String(user.userId)
+                if (num.startsWith(searchStr)) {
+                    tempMatchedUsers.push(user)
+                }
+            }
+
+            setMatchedUsers(tempMatchedUsers)
+            return
+        } else { return }
     }
 
     const handleKeyPress = (e) => {
