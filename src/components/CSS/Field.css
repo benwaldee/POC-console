@@ -157,3 +157,9 @@
     font-weight: bold;
     border-bottom: 1px solid #c2c2c2;
 }
+
+.Field_table-wrap-wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}

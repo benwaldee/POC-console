@@ -21,7 +21,7 @@ function Vins() {
             <Navbar />
             <div className="Join_outer-wrap">
                 <div className="Join_Search-wrap">  <VinSearch /></div>
-                {/* <div className="Join_Field-wrap">  <VinField /></div> */}
+                <div className="Join_Field-wrap">  <VinField /></div>
             </div>
             <Footer />
         </>
