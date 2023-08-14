@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Search.css"
-import "../CSS/UserSearch.css"
+import "../CSS/PentaSearch.css"
 
 
 function UserSearch() {
@@ -112,26 +112,26 @@ function UserSearch() {
             {displaySearchResults && userArr &&
                 <div className='Search_search-results-wrap-table'>
                     <div className='Search_flex'>
-                        <div className='UserSearch_table-header'>
-                            <div className='UserSearch_table-header-val'>User Id</div>
-                            <div className='UserSearch_table-header-val'>First Name</div>
-                            <div className='UserSearch_table-header-val'>Last Name</div>
-                            <div className='UserSearch_table-header-val'>User Type</div>
-                            <div className='UserSearch_table-header-val'>Active</div>
+                        <div className='PentaSearch_table-header'>
+                            <div className='PentaSearch_table-header-val'>User Id</div>
+                            <div className='PentaSearch_table-header-val'>First Name</div>
+                            <div className='PentaSearch_table-header-val'>Last Name</div>
+                            <div className='PentaSearch_table-header-val'>User Type</div>
+                            <div className='PentaSearch_table-header-val'>Active</div>
                         </div>
                         {matchedUsers?.map((user, index) =>
                             <div
-                                className={`UserSearch_table-entry UserSearch_table-entry-last-${matchedUsers.length - 1 === index}`}
+                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedUsers.length - 1 === index}`}
                                 key={user.userId}
                                 onClick={() => {
                                     setClickedUser(user)
                                 }}
                             >
-                                <div className='UserSearch_table-entry-val '>{user.userId}</div>
-                                <div className='UserSearch_table-entry-val'>{user.firstName}</div>
-                                <div className='UserSearch_table-entry-val'>{user.lastName}</div>
-                                <div className='UserSearch_table-entry-val'>{translateUserType(user.userType)}</div>
-                                <div className='UserSearch_table-entry-val'>{user.active === 1 ? "Active" : "Inactive"}</div>
+                                <div className='PentaSearch_table-entry-val '>{user.userId}</div>
+                                <div className='PentaSearch_table-entry-val'>{user.firstName}</div>
+                                <div className='PentaSearch_table-entry-val'>{user.lastName}</div>
+                                <div className='PentaSearch_table-entry-val'>{translateUserType(user.userType)}</div>
+                                <div className='PentaSearch_table-entry-val'>{user.active === 1 ? "Active" : "Inactive"}</div>
                             </div>
 
                         )}

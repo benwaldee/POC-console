@@ -5,21 +5,21 @@ import "../CSS/Search.css"
 import "../CSS/PentaSearch.css"
 
 
-function DeliverySearch() {
+function VinSearch() {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
     const [search, setSearch] = useState("")
-    const [matchedDeliveries, setMatchedDeliveries] = useState([])
+    const [matchedVins, setMatchedVins] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
 
     //map for quick access to deliveries via load number
-    const [deliveryMap, setDeliveryMap] = useState(null)
+    const [vinMap, setVinMap] = useState(null)
 
     //map for access to load when delivery is clicked
     const [loadMap, setLoadMap] = useState(null)
 
-    const { setClickedDelivery } = useGeneralContext()
+    const { setClickedVin } = useGeneralContext()
     const { setClickedLoad } = useGeneralContext()
     const { loadArr, setLoadArr } = useGeneralContext()
 
@@ -46,18 +46,19 @@ function DeliverySearch() {
     //this use effect creates all of the maps when it sense a change in loadArr
     useEffect(() => {
         if (loadArr) {
-            const tempDeliveryMap = {}
+            const tempVinMap = {}
             for (let load of loadArr) {
-                tempDeliveryMap[load.data.loadNum] = Object.values(load.data.deliveries)
+                //access all of the vins by grabbing the vinDeliveries which contain the vins (in vinInfo)
+                tempVinMap[Number(load.data.loadNum)] = Object.values(load.data.vinDeliveries)
             }
 
-            //attach load numbers to deliveries for later use
-            for (let loadNum in tempDeliveryMap) {
-                for (let delivery of tempDeliveryMap[loadNum]) {
-                    delivery["loadNum"] = loadNum
+            //attach load numbers to vins for later use
+            for (let loadNum in tempVinMap) {
+                for (let vin of tempVinMap[loadNum]) {
+                    vin["loadNum"] = loadNum
                 }
             }
-            setDeliveryMap(tempDeliveryMap)
+            setVinMap(tempVinMap)
 
 
             const tempLoadMap = {}
@@ -80,25 +81,25 @@ function DeliverySearch() {
     //search function that will return everything with the % keyword
     // will match a search if the load number begins with the search input
     const searchLoads = (searchStr) => {
-        if (deliveryMap) {
-            const tempDeliveryMap = JSON.parse(JSON.stringify(deliveryMap))
-            let tempMatchedDeliveries = []
+        if (vinMap) {
+            const tempVinMap = JSON.parse(JSON.stringify(vinMap))
+            let tempMatchedVins = []
 
             if (searchStr === "%") {
-                for (let loadNum in tempDeliveryMap) {
-                    tempMatchedDeliveries = [...tempMatchedDeliveries, ...tempDeliveryMap[loadNum]]
+                for (let loadNum in vinMap) {
+                    tempMatchedVins = [...tempMatchedVins, ...tempVinMap[loadNum]]
                 }
-                setMatchedDeliveries(tempMatchedDeliveries)
+                setMatchedVins(tempMatchedVins)
                 return
             }
 
-            for (let loadNum in tempDeliveryMap) {
+            for (let loadNum in tempVinMap) {
                 if (String(loadNum).startsWith(searchStr)) {
-                    tempMatchedDeliveries = [...tempMatchedDeliveries, ...tempDeliveryMap[loadNum]]
+                    tempMatchedVins = [...tempMatchedVins, ...tempVinMap[loadNum]]
                 }
             }
 
-            setMatchedDeliveries(tempMatchedDeliveries)
+            setMatchedVins(tempMatchedVins)
             return
         } else { return }
     }
@@ -112,7 +113,7 @@ function DeliverySearch() {
 
     return (
         <>
-            <h1 className='Search_title'>DELIVERIES</h1>
+            <h1 className='Search_title'>VINS</h1>
             <div className='Search_search-box'>
                 <label className="Search_search-label" for="load#">Load # :</label>
                 <input
@@ -139,26 +140,26 @@ function DeliverySearch() {
                 <div className='Search_search-results-wrap-table'>
                     <div className='Search_flex'>
                         <div className='PentaSearch_table-header'>
+                            <div className='PentaSearch_table-header-val'>Vin Number</div>
                             <div className='PentaSearch_table-header-val'>Load Number</div>
-                            <div className='PentaSearch_table-header-val'>Customer Number</div>
-                            <div className='PentaSearch_table-header-val'>Dealer</div>
-                            <div className='PentaSearch_table-header-val'>Ship Date</div>
-                            <div className='PentaSearch_table-header-val'>Delivery Date</div>
+                            <div className='PentaSearch_table-header-val'>Type</div>
+                            <div className='PentaSearch_table-header-val'>Color</div>
+                            <div className='PentaSearch_table-header-val'>Body</div>
                         </div>
-                        {matchedDeliveries?.map((delivery, index) =>
+                        {matchedVins?.map((vin, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedDeliveries.length - 1 === index}`}
-                                key={`${delivery.dealer.customerNumber}-${delivery.dealer.mfg}`}
+                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedVins.length - 1 === index}`}
+                                key={vin.vin_number}
                                 onClick={() => {
-                                    setClickedDelivery(delivery)
-                                    setClickedLoad(loadMap[delivery.loadNum])
+                                    setClickedVin(vin)
+                                    setClickedLoad(loadMap[vin.loadNum])
                                 }}
                             >
-                                <div className='PentaSearch_table-entry-val '>{delivery.loadNum}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.dealer.customerNumber}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.dealer.customerName}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.shipDate}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.estDeliverDate}</div>
+                                <div className='PentaSearch_table-entry-val '>{vin.vinInfo.vin_number}</div>
+                                <div className='PentaSearch_table-entry-val '>{vin.loadNum}</div>
+                                <div className='PentaSearch_table-entry-val'>{vin.vinInfo.type}</div>
+                                <div className='PentaSearch_table-entry-val'>{vin.vinInfo.color}</div>
+                                <div className='PentaSearch_table-entry-val'>{vin.vinInfo.body}</div>
                             </div>
 
                         )}
@@ -167,9 +168,9 @@ function DeliverySearch() {
                 </div>
             }
             {
-                !matchedDeliveries?.length &&
+                !matchedVins?.length &&
                 <div className='Search_search-results-wrap'>
-                    <div className='Search_search-results-empty'>No deliveries match the current search criteria</div>
+                    <div className='Search_search-results-empty'>No vins match the current search criteria</div>
                 </div>
             }
 
@@ -185,4 +186,4 @@ function DeliverySearch() {
 
 }
 
-export default DeliverySearch;
+export default VinSearch;

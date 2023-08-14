@@ -15,7 +15,9 @@ export function GeneralProvider({ children }) {
     const [clickedUser, setClickedUser] = useState(null);
 
     const [clickedDelivery, setClickedDelivery] = useState(null);
-    // const [deliveryArr, setDeliveryArr] = useState(null)
+
+    const [clickedVin, setClickedVin] = useState(null);
+
 
 
     useEffect(() => {
@@ -29,8 +31,8 @@ export function GeneralProvider({ children }) {
                 loadArr, setLoadArr,
                 userArr, setUserArr,
                 clickedUser, setClickedUser,
-                clickedDelivery, setClickedDelivery
-                // deliveryArr, setDeliveryArr
+                clickedDelivery, setClickedDelivery,
+                clickedVin, setClickedVin
             }}>
                 {children}
             </GeneralContext.Provider>
