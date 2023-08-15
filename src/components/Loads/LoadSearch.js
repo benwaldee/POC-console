@@ -77,7 +77,7 @@ function LoadSearch() {
         <>
             <h1 className='Search_title'>LOADS</h1>
             <div className='Search_search-box'>
-                <label className="Search_search-label" for="load#">Load # :</label>
+                <label className="Search_search-label" htmlFor="load#">Load # :</label>
                 <input
                     id='load#'
                     className='Search_search-field'

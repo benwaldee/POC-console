@@ -18,6 +18,10 @@ export function GeneralProvider({ children }) {
 
     const [clickedVin, setClickedVin] = useState(null);
 
+    const [clickedDamage, setClickedDamage] = useState(null)
+
+    const [clickedDealer, setClickedDealer] = useState(null)
+
 
 
     useEffect(() => {
@@ -32,7 +36,9 @@ export function GeneralProvider({ children }) {
                 userArr, setUserArr,
                 clickedUser, setClickedUser,
                 clickedDelivery, setClickedDelivery,
-                clickedVin, setClickedVin
+                clickedVin, setClickedVin,
+                clickedDamage, setClickedDamage,
+                clickedDealer, setClickedDealer
             }}>
                 {children}
             </GeneralContext.Provider>

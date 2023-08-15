@@ -193,11 +193,11 @@ function UserField() {
                                 type='text'
                                 value={active}
                                 onChange={(e) => setActive(e.target.value)}
+                                defaultValue={Number(active)}
                             >
-                                {active === 0 && <option value={0} selected>inactive</option>}
-                                {active !== 0 && <option value={0} >inactive</option>}
-                                {active === 1 && <option value={1} selected>active</option>}
-                                {active !== 1 && <option value={1} >active</option>}
+
+                                <option value={0} >inactive</option>
+                                <option value={1} >active</option>
 
                             </select>
                             <label className='Field_edit-label' htmlFor="autoInspectLastDelivery">autoInspectLastDelivery</label>

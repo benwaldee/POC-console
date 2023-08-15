@@ -115,7 +115,7 @@ function DeliverySearch() {
         <>
             <h1 className='Search_title'>DELIVERIES</h1>
             <div className='Search_search-box'>
-                <label className="Search_search-label" for="load#">Load # :</label>
+                <label className="Search_search-label" htmlFor="load#">Load # :</label>
                 <input
                     id='load#'
                     className='Search_search-field'
@@ -149,7 +149,7 @@ function DeliverySearch() {
                         {matchedDeliveries?.map((delivery, index) =>
                             <div
                                 className={`PentaSearch_table-entry Search_table-entry-last-${matchedDeliveries.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
-                                key={`${delivery.dealer.customerNumber}-${delivery.dealer.mfg}`}
+                                key={`${delivery.dealer.customerNumber}-${delivery.dealer.mfg}-${delivery.loadNum}`}
                                 onClick={() => {
                                     setClickedDelivery(delivery)
                                     setClickedLoad(loadMap[delivery.loadNum])

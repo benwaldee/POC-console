@@ -116,7 +116,7 @@ function VinSearch() {
         <>
             <h1 className='Search_title'>VINS</h1>
             <div className='Search_search-box'>
-                <label className="Search_search-label" for="load#">Load # :</label>
+                <label className="Search_search-label" htmlFor="load#">Load # :</label>
                 <input
                     id='load#'
                     className='Search_search-field'
@@ -150,7 +150,7 @@ function VinSearch() {
                         {matchedVins?.map((vin, index) =>
                             <div
                                 className={`PentaSearch_table-entry Search_table-entry-last-${matchedVins.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
-                                key={vin.vin_number}
+                                key={vin.vinInfo.vin_number}
                                 onClick={() => {
                                     setClickedVin(vin)
                                     setClickedLoad(loadMap[vin.loadNum])
