@@ -130,6 +130,9 @@
     border: none;
 }
 
+.Search_table-entry-clicked-true {
+    background-color: #f1f1f1;
+}
 
 .Search_table-entry {
     cursor: pointer;
@@ -138,4 +141,8 @@
 .Search_table-entry:hover {
     cursor: pointer;
     background-color: #f1f1f1;
+}
+
+.Search_table-entry {
+    cursor: pointer;
 }

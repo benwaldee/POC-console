@@ -22,6 +22,14 @@
     margin-top: 63px;
 }
 
+@media (max-width: 1000px) {
+    .Field_outer-wrap {
+        margin-top: 33px;
+    }
+
+}
+
+
 .Field_JSON-pre {
     background-color: #ececec;
     padding: 10px;

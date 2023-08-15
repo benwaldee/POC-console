@@ -16,6 +16,12 @@ function Vins() {
 
     }, [])
 
+    //title setter
+    useEffect(() => {
+        document.title = "Vins";
+    }, [])
+
+
     return (
         <>
             <Navbar />

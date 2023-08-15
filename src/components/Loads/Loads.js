@@ -16,6 +16,12 @@ function Loads() {
 
     }, [])
 
+    //title setter
+    useEffect(() => {
+        document.title = "Loads";
+    }, [])
+
+
     return (
         <>
             <Navbar />

@@ -12,6 +12,7 @@ function UserSearch() {
     const [search, setSearch] = useState("")
     const [matchedUsers, setMatchedUsers] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
+    const [clickedDivIndex, setClickedDivIndex] = useState(null)
 
     const { setClickedUser } = useGeneralContext()
     const { userArr, setUserArr } = useGeneralContext()
@@ -121,10 +122,11 @@ function UserSearch() {
                         </div>
                         {matchedUsers?.map((user, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedUsers.length - 1 === index}`}
+                                className={`PentaSearch_table-entry Search_table-entry-last-${matchedUsers.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={user.userId}
                                 onClick={() => {
                                     setClickedUser(user)
+                                    setClickedDivIndex(index)
                                 }}
                             >
                                 <div className='PentaSearch_table-entry-val '>{user.userId}</div>

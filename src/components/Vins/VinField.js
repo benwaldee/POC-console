@@ -67,6 +67,7 @@ function VinField() {
             await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/save_load', editLoad)
         } catch (error) {
             console.error("error w loads", error)
+            console.log("editLoad:        ", editLoad)
         }
 
         // console.log(editLoad)

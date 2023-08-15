@@ -12,6 +12,7 @@ function DeliverySearch() {
     const [search, setSearch] = useState("")
     const [matchedDeliveries, setMatchedDeliveries] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
+    const [clickedDivIndex, setClickedDivIndex] = useState(null)
 
     //map for quick access to deliveries via load number
     const [deliveryMap, setDeliveryMap] = useState(null)
@@ -147,11 +148,12 @@ function DeliverySearch() {
                         </div>
                         {matchedDeliveries?.map((delivery, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedDeliveries.length - 1 === index}`}
+                                className={`PentaSearch_table-entry Search_table-entry-last-${matchedDeliveries.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={`${delivery.dealer.customerNumber}-${delivery.dealer.mfg}`}
                                 onClick={() => {
                                     setClickedDelivery(delivery)
                                     setClickedLoad(loadMap[delivery.loadNum])
+                                    setClickedDivIndex(index)
                                 }}
                             >
                                 <div className='PentaSearch_table-entry-val '>{delivery.loadNum}</div>

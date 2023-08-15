@@ -12,6 +12,7 @@ function VinSearch() {
     const [search, setSearch] = useState("")
     const [matchedVins, setMatchedVins] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
+    const [clickedDivIndex, setClickedDivIndex] = useState(null)
 
     //map for quick access to deliveries via load number
     const [vinMap, setVinMap] = useState(null)
@@ -148,11 +149,12 @@ function VinSearch() {
                         </div>
                         {matchedVins?.map((vin, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedVins.length - 1 === index}`}
+                                className={`PentaSearch_table-entry Search_table-entry-last-${matchedVins.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={vin.vin_number}
                                 onClick={() => {
                                     setClickedVin(vin)
                                     setClickedLoad(loadMap[vin.loadNum])
+                                    setClickedDivIndex(index)
                                 }}
                             >
                                 <div className='PentaSearch_table-entry-val '>{vin.vinInfo.vin_number}</div>

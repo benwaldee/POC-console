@@ -89,10 +89,10 @@ function DeliveryField() {
 
         } catch (error) {
             console.error("error w loads", error)
+            console.log("editLoad:        ", editLoad)
+            console.log("editLoadFlag:    ", editLoadFlag)
         }
 
-        // console.log(editLoad)
-        // console.log(editLoadFlag)
 
 
 
@@ -230,13 +230,11 @@ function DeliveryField() {
                                 type='text'
                                 value={tabletDownloadStatus}
                                 onChange={(e) => setTabletDownloadStatus(e.target.value)}
+                                defaultValue={Number(tabletDownloadStatus)}
                             >
-                                {tabletDownloadStatus === 0 && <option value={0} selected>new</option>}
-                                {tabletDownloadStatus !== 0 && <option value={0} >new</option>}
-                                {tabletDownloadStatus === 1 && <option value={1} selected>ready</option>}
-                                {tabletDownloadStatus !== 1 && <option value={1} >ready</option>}
-                                {tabletDownloadStatus === 2 && <option value={2} selected>downloaded</option>}
-                                {tabletDownloadStatus !== 2 && <option value={2} >downloaded</option>}
+                                <option value={0} >new</option>
+                                <option value={1} >ready</option>
+                                <option value={2} >downloaded</option>
                             </select>
 
                         </div>

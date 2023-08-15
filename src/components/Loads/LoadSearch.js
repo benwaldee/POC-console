@@ -11,6 +11,7 @@ function LoadSearch() {
     const [search, setSearch] = useState("")
     const [matchedLoads, setMatchedLoads] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
+    const [clickedDivIndex, setClickedDivIndex] = useState(null)
 
     const { setClickedLoad } = useGeneralContext()
     const { loadArr, setLoadArr } = useGeneralContext()
@@ -108,10 +109,11 @@ function LoadSearch() {
                         </div>
                         {matchedLoads?.map((load, index) =>
                             <div
-                                className={`Search_table-entry Search_table-entry-last-${matchedLoads.length - 1 === index}`}
+                                className={`Search_table-entry Search_table-entry-last-${matchedLoads.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={load.data.loadNum}
                                 onClick={() => {
                                     setClickedLoad(load)
+                                    setClickedDivIndex(index)
                                 }}
                             >
                                 <div className='Search_table-entry-val '>{load.data.loadNum}</div>

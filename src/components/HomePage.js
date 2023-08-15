@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../context/GeneralContext';
-import "./CSS/HomePage.css"
 import Navbar from './Navbar';
 import Footer from './Footer';
 import HomePageBox from './HomePageBox';
@@ -42,6 +41,13 @@ function HomePage() {
         fetchUsers()
 
     }, [])
+
+    //title setter
+    useEffect(() => {
+        document.title = "Cassens App";
+    }, [])
+
+
     //FUNCTIONS
     //-----------------------------------------------------------------------------------------------------------
     return (

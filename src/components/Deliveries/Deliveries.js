@@ -16,6 +16,12 @@ function Deliveries() {
 
     }, [])
 
+    //title setter
+    useEffect(() => {
+        document.title = "Deliveries";
+    }, [])
+
+
     return (
         <>
             <Navbar />

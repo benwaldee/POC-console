@@ -91,9 +91,10 @@ function UserField() {
 
         } catch (error) {
             console.error("error w edit user", error)
+            console.log("editUser:         ", editUser)
         }
 
-        // console.log(editLoad)
+
 
 
         return
@@ -177,15 +178,13 @@ function UserField() {
                                 type='number'
                                 value={userType}
                                 onChange={(e) => setUserType(e.target.value)}
+                                defaultValue={Number(userType)}
                             >
-                                {userType === 0 && <option value={0} selected>dealer</option>}
-                                {userType !== 0 && <option value={0} >dealer</option>}
-                                {userType === 1 && <option value={1} selected>driver</option>}
-                                {userType !== 1 && <option value={1} >driver</option>}
-                                {userType === 2 && <option value={2} selected>admin</option>}
-                                {userType !== 2 && <option value={2} >admin</option>}
-                                {userType === 3 && <option value={3} selected>supervisor</option>}
-                                {userType !== 3 && <option value={3} >supervisor</option>}
+                                <option value={0} >dealer</option>
+                                <option value={1} >driver</option>
+                                <option value={2} >admin</option>
+                                <option value={3} >supervisor</option>
+
                             </select>
                             <label className='Field_edit-label' htmlFor="active">active</label>
                             <select

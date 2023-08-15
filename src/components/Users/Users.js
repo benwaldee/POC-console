@@ -8,6 +8,11 @@ import { useEffect } from "react";
 
 function Users() {
 
+    //title setter
+    useEffect(() => {
+        document.title = "Users";
+    }, [])
+
 
     return (
         <>
