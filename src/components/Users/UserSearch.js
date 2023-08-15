@@ -122,7 +122,7 @@ function UserSearch() {
                         </div>
                         {matchedUsers?.map((user, index) =>
                             <div
-                                className={`PentaSearch_table-entry Search_table-entry-last-${matchedUsers.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
+                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedUsers?.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={user.userId}
                                 onClick={() => {
                                     setClickedUser(user)

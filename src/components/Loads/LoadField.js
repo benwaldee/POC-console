@@ -117,8 +117,8 @@ function LoadField() {
         // THEN hit flag load with axios
         try {
 
-            await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/save_load', editLoad)
-            await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/set_load_flags', editLoadFlag)
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', editLoad)
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/set_load_flags', editLoadFlag)
 
         } catch (error) {
             console.error("error w loads", error)
@@ -128,7 +128,6 @@ function LoadField() {
 
         // console.log(editLoad)
         // console.log(editLoadFlag)
-
 
 
         return

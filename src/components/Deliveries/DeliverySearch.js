@@ -32,7 +32,7 @@ function DeliverySearch() {
         const fetchLoads = async () => {
             try {
 
-                const loads = await axios.get('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/all')
+                const loads = await axios.get('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/all')
                 setLoadArr(loads.data.loadArr)
 
             } catch (error) {
@@ -148,7 +148,7 @@ function DeliverySearch() {
                         </div>
                         {matchedDeliveries?.map((delivery, index) =>
                             <div
-                                className={`PentaSearch_table-entry Search_table-entry-last-${matchedDeliveries.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
+                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedDeliveries.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={`${delivery.dealer.customerNumber}-${delivery.dealer.mfg}-${delivery.loadNum}`}
                                 onClick={() => {
                                     setClickedDelivery(delivery)
