@@ -4,12 +4,12 @@ import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Search.css"
 
 
-function LoadSearch() {
+function LoadSearch({ remountParent }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
     const [search, setSearch] = useState("")
-    const [matchedLoads, setMatchedLoads] = useState([])
+    const [matchedLoads, setMatchedLoads] = useState(null)
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
     const [clickedDivIndex, setClickedDivIndex] = useState(null)
 
@@ -20,11 +20,11 @@ function LoadSearch() {
     //------------------------------------------------------------------------------------------------------------
     useEffect(() => {
 
+
         const fetchLoads = async () => {
             try {
 
                 const loads = await axios.get('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/all')
-                console.log(loads)
                 setLoadArr(loads.data.loadArr)
 
             } catch (error) {
@@ -34,11 +34,20 @@ function LoadSearch() {
 
         fetchLoads()
 
-    }, [])
+    }, [remountParent]) //fetch loads both on initial mount and when parent remounts (after edit field is submitted)
 
     useEffect(() => {
         displaySearchResults && searchLoads(search)
     }, [displaySearchResults])
+
+    //reset state on parent remount
+    useEffect(() => {
+
+        setSearch("")
+        setMatchedLoads(null)
+        setDisplaySearchResults(false)
+        setClickedDivIndex(null)
+    }, [remountParent])
 
     //FUNCTIONS
     //-----------------------------------------------------------------------------------------------------------

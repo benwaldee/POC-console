@@ -4,12 +4,12 @@ import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Field.css"
 import "../CSS/UserField.css"
 
-function UserField() {
+function UserField({ handleRemount }) {
 
     //STATE VARS
     //----------------------------------------------------------------------------------------
     const [display, setDisplay] = useState("TABLE")
-    const { clickedUser } = useGeneralContext()
+    const { clickedUser, setClickedUser } = useGeneralContext()
 
 
     //data
@@ -43,7 +43,7 @@ function UserField() {
             setEmail(String(clickedUser.email))
             setUserType(clickedUser.userType)
             setActive(clickedUser.active)
-            setAutoInspectLastDelivery(clickedUser.autoInspectLastDelivery)
+            setAutoInspectLastDelivery(Boolean(clickedUser.autoInspectLastDelivery))
             setRestrictedDispatch(clickedUser.restrictedDispatch)
             setHighClaims(clickedUser.highClaims)
             setRequiresAudit(clickedUser.requiresAudit)
@@ -88,6 +88,8 @@ function UserField() {
         try {
 
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/create_user', editUser)
+            await setClickedUser(null)
+            await handleRemount()
 
         } catch (error) {
             console.error("error w edit user", error)
@@ -205,7 +207,7 @@ function UserField() {
                                 id="autoInspectLastDelivery"
                                 className='Field_edit-check'
                                 type='checkbox'
-                                value={autoInspectLastDelivery}
+                                checked={autoInspectLastDelivery}
                                 onChange={() => setAutoInspectLastDelivery(!autoInspectLastDelivery)}
                             ></input>
                             <label className='Field_edit-label' htmlFor="restrictedDispatch">restrictedDispatch</label>
@@ -213,7 +215,7 @@ function UserField() {
                                 id="restrictedDispatch"
                                 className='Field_edit-check'
                                 type='checkbox'
-                                value={restrictedDispatch}
+                                checked={restrictedDispatch}
                                 onChange={() => setRestrictedDispatch(!restrictedDispatch)}
                             ></input>
                             <label className='Field_edit-label' htmlFor="highClaims">highClaims</label>
@@ -221,7 +223,7 @@ function UserField() {
                                 id="highClaims"
                                 className='Field_edit-check'
                                 type='checkbox'
-                                value={highClaims}
+                                checked={highClaims}
                                 onChange={() => setHighClaims(!highClaims)}
                             ></input>
                             <label className='Field_edit-label' htmlFor="requiresAudit">requiresAudit</label>
@@ -229,7 +231,7 @@ function UserField() {
                                 id="requiresAudit"
                                 className='Field_edit-check'
                                 type='checkbox'
-                                value={requiresAudit}
+                                checked={requiresAudit}
                                 onChange={() => setRequiresAudit(!requiresAudit)}
                             ></input>
                             <label className='Field_edit-label' htmlFor="inspectionAccess">inspectionAccess</label>
@@ -245,7 +247,7 @@ function UserField() {
                                 id="supervisorPreloadCheck"
                                 className='Field_edit-check'
                                 type='checkbox'
-                                value={supervisorPreloadCheck}
+                                checked={supervisorPreloadCheck}
                                 onChange={() => setSupervisorPreloadCheck(!supervisorPreloadCheck)}
                             ></input>
                             <label className='Field_edit-label' htmlFor="helpTerm">helpTerm</label>

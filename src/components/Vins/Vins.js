@@ -4,10 +4,11 @@ import "../CSS/Join.css"
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { useGeneralContext } from '../../context/GeneralContext';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Vins() {
 
+    const [remountParent, setRemountParent] = useState(false);
     const { setClickedVin } = useGeneralContext()
 
     useEffect(() => {
@@ -21,13 +22,17 @@ function Vins() {
         document.title = "Vins";
     }, [])
 
+    //reMounter
+    const handleRemount = () => {
+        setRemountParent(!remountParent);
+    };
 
     return (
         <>
             <Navbar />
             <div className="Join_outer-wrap">
-                <div className="Join_Search-wrap">  <VinSearch /></div>
-                <div className="Join_Field-wrap">  <VinField /></div>
+                <div className="Join_Search-wrap">  <VinSearch remountParent={remountParent} /></div>
+                <div className="Join_Field-wrap">  <VinField handleRemount={handleRemount} /></div>
             </div>
             <Footer />
         </>

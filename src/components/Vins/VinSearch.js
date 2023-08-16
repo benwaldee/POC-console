@@ -5,7 +5,7 @@ import "../CSS/Search.css"
 import "../CSS/PentaSearch.css"
 
 
-function VinSearch() {
+function VinSearch({ remountParent }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ function VinSearch() {
 
         fetchLoads()
 
-    }, [])
+    }, [remountParent])
 
     //this use effect creates all of the maps when it sense a change in loadArr
     useEffect(() => {
@@ -75,6 +75,15 @@ function VinSearch() {
     useEffect(() => {
         displaySearchResults && searchLoads(search)
     }, [displaySearchResults])
+
+    //reset state on parent remount
+    useEffect(() => {
+
+        setSearch("")
+        setMatchedVins(null)
+        setDisplaySearchResults(false)
+        setClickedDivIndex(null)
+    }, [remountParent])
 
     //FUNCTIONS
     //-----------------------------------------------------------------------------------------------------------

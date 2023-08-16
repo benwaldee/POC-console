@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Field.css"
 
-function VinField() {
+function VinField({ handleRemount }) {
 
     //STATE VARS
     //----------------------------------------------------------------------------------------
     const [display, setDisplay] = useState("TABLE")
-    const { clickedVin } = useGeneralContext()
+    const { clickedVin, setClickedVin } = useGeneralContext()
     const { clickedLoad } = useGeneralContext()
 
 
@@ -47,8 +47,6 @@ function VinField() {
         const editLoad = JSON.parse(JSON.stringify(clickedLoad))
         const prevVinNum = clickedVin.vin
 
-        console.log(editLoad)
-
         //if they changed the vin number, there is a lot of work to do in the load, lock it for now
         if (Number(prevVinNum) !== Number(vinNumber)) {
 
@@ -67,6 +65,9 @@ function VinField() {
         // hit save load with axios
         try {
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', editLoad)
+            await setClickedVin(null)
+            await handleRemount()
+
         } catch (error) {
             console.error("error w loads", error)
             console.log("editLoad:        ", editLoad)

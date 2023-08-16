@@ -11,6 +11,8 @@ export function GeneralProvider({ children }) {
     const [clickedLoad, setClickedLoad] = useState(null);
     const [loadArr, setLoadArr] = useState(null)
 
+    const [clickedDivIndex, setClickedDivIndex] = useState(null)
+
     const [userArr, setUserArr] = useState(null)
     const [clickedUser, setClickedUser] = useState(null);
 
@@ -38,7 +40,8 @@ export function GeneralProvider({ children }) {
                 clickedDelivery, setClickedDelivery,
                 clickedVin, setClickedVin,
                 clickedDamage, setClickedDamage,
-                clickedDealer, setClickedDealer
+                clickedDealer, setClickedDealer,
+                clickedDivIndex, setClickedDivIndex
             }}>
                 {children}
             </GeneralContext.Provider>

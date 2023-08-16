@@ -5,7 +5,7 @@ import "../CSS/Search.css"
 import "../CSS/PentaSearch.css"
 
 
-function UserSearch() {
+function UserSearch({ remountParent }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
@@ -34,11 +34,21 @@ function UserSearch() {
 
         fetchUsers()
 
-    }, [])
+    }, [remountParent])
 
     useEffect(() => {
         displaySearchResults && searchUsers(search)
     }, [displaySearchResults])
+
+    //reset state on parent remount
+    useEffect(() => {
+
+        setSearch("")
+        setMatchedUsers(null)
+        setDisplaySearchResults(false)
+        setClickedDivIndex(null)
+
+    }, [remountParent])
 
     //FUNCTIONS
     //-----------------------------------------------------------------------------------------------------------

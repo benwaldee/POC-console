@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Field.css"
 
-function DeliveryField() {
+function DeliveryField({ handleRemount }) {
 
     //STATE VARS
     //----------------------------------------------------------------------------------------
     const [display, setDisplay] = useState("TABLE")
-    const { clickedDelivery } = useGeneralContext()
+    const { clickedDelivery, setClickedDelivery } = useGeneralContext()
     const { clickedLoad } = useGeneralContext()
 
 
@@ -86,6 +86,8 @@ function DeliveryField() {
 
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', editLoad)
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/set_load_flags', editLoadFlag)
+            await setClickedDelivery(null)
+            await handleRemount()
 
         } catch (error) {
             console.error("error w loads", error)

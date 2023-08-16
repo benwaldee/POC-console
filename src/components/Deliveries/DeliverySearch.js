@@ -5,7 +5,7 @@ import "../CSS/Search.css"
 import "../CSS/PentaSearch.css"
 
 
-function DeliverySearch() {
+function DeliverySearch({ remountParent }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
@@ -13,6 +13,7 @@ function DeliverySearch() {
     const [matchedDeliveries, setMatchedDeliveries] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
     const [clickedDivIndex, setClickedDivIndex] = useState(null)
+
 
     //map for quick access to deliveries via load number
     const [deliveryMap, setDeliveryMap] = useState(null)
@@ -42,7 +43,7 @@ function DeliverySearch() {
 
         fetchLoads()
 
-    }, [])
+    }, [remountParent])
 
     //this use effect creates all of the maps when it sense a change in loadArr
     useEffect(() => {
@@ -74,6 +75,16 @@ function DeliverySearch() {
     useEffect(() => {
         displaySearchResults && searchLoads(search)
     }, [displaySearchResults])
+
+    //reset state on parent remount
+    useEffect(() => {
+
+        setSearch("")
+        setMatchedDeliveries(null)
+        setDisplaySearchResults(false)
+        setClickedDivIndex(null)
+
+    }, [remountParent])
 
     //FUNCTIONS
     //-----------------------------------------------------------------------------------------------------------
