@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../context/GeneralContext';
 import Navbar from './Navbar';

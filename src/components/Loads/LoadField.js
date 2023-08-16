@@ -8,7 +8,8 @@ function LoadField() {
     //STATE VARS
     //----------------------------------------------------------------------------------------
     const [display, setDisplay] = useState("TABLE")
-    const { clickedLoad } = useGeneralContext()
+
+    const { clickedLoad, setClickedLoad } = useGeneralContext()
 
     //form vars
     //flags
@@ -71,7 +72,10 @@ function LoadField() {
             setNextDispatch(clickedLoad.data.nextDispatch)
         }
 
+
     }, [clickedLoad])
+
+
 
     //FUNCTIONS
     //-----------------------------------------------------------------------------------------------
@@ -119,6 +123,7 @@ function LoadField() {
 
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', editLoad)
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/set_load_flags', editLoadFlag)
+            setClickedLoad(null)
 
         } catch (error) {
             console.error("error w loads", error)

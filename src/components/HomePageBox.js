@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useGeneralContext } from '../context/GeneralContext';
 import "./CSS/HomePageBox.css"
 
 function HomePageBox() {

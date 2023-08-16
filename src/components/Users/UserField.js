@@ -87,7 +87,7 @@ function UserField() {
         // hit edit user  with axios
         try {
 
-            await axios.post('EDIT USER ENDPOINT HERE', editUser)
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/create_user', editUser)
 
         } catch (error) {
             console.error("error w edit user", error)

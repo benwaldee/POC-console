@@ -24,7 +24,7 @@ function UserSearch() {
         const fetchUsers = async () => {
             try {
 
-                const users = await axios.get('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/users')
+                const users = await axios.get('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/users')
                 setUserArr(users.data.userArr)
 
             } catch (error) {
