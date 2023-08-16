@@ -23,3 +23,75 @@
         margin-left: 24px;
     }
 }
+
+.Join_banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #7fe092;
+    color: white;
+    height: 45px;
+    width: 100%;
+    position: fixed;
+    top: -35px
+}
+
+@keyframes slideIn {
+    0% {
+        top: -45px;
+    }
+
+    25%,
+    100% {
+        top: 0;
+    }
+}
+
+.Join_banner {
+    animation: slideIn 1s ease-in forwards;
+}
+
+.Join_banner-text {
+    color: white;
+    /* border: 1px solid yellow; */
+    height: 100%;
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Join_banner-exit {
+    color: white;
+    align-self: end;
+    justify-self: end;
+    height: 100%;
+    /* border: 1px solid brown; */
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.Join_banner-spacer {
+    color: white;
+    height: 100%;
+    /* border: 1px solid aqua; */
+    width: 33%;
+}
+
+.Join_banner-X {
+    margin-right: 20px;
+    /* border: 1px solid purple; */
+    height: 100%;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Join_banner-X:hover {
+    background-color: #98e6a8;
+}
