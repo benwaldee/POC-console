@@ -47,16 +47,18 @@ function VinField() {
         const editLoad = JSON.parse(JSON.stringify(clickedLoad))
         const prevVinNum = clickedVin.vin
 
+        console.log(editLoad)
+
         //if they changed the vin number, there is a lot of work to do in the load, lock it for now
         if (Number(prevVinNum) !== Number(vinNumber)) {
 
             //if they didn't change the vin number, the work is simple
         } else {
-            editLoad.vinDeliveries[String(vinNumber)].vinInfo.body = body
-            editLoad.vinDeliveries[String(vinNumber)].vinInfo.weight = weight
-            editLoad.vinDeliveries[String(vinNumber)].vinInfo.color = color
-            editLoad.vinDeliveries[String(vinNumber)].vinInfo.colorDesc = colorDesc
-            editLoad.vinDeliveries[String(vinNumber)].vinInfo.type = type
+            editLoad.data.vinDeliveries[String(vinNumber)].vinInfo.body = body
+            editLoad.data.vinDeliveries[String(vinNumber)].vinInfo.weight = weight
+            editLoad.data.vinDeliveries[String(vinNumber)].vinInfo.color = color
+            editLoad.data.vinDeliveries[String(vinNumber)].vinInfo.colorDesc = colorDesc
+            editLoad.data.vinDeliveries[String(vinNumber)].vinInfo.type = type
         }
 
         delete editLoad._id
@@ -64,7 +66,7 @@ function VinField() {
 
         // hit save load with axios
         try {
-            await axios.post('https://kek6x29n3i.execute-api.us-east-1.amazonaws.com/save_load', editLoad)
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', editLoad)
         } catch (error) {
             console.error("error w loads", error)
             console.log("editLoad:        ", editLoad)
@@ -74,6 +76,15 @@ function VinField() {
         return
     }
 
+    const prepVinJSON = (vin) => {
+
+        const resVin = {}
+        resVin.vinInfo = vin.vinInfo
+        resVin.damages = vin.damages
+        resVin.images = vin.images
+
+        return JSON.stringify(resVin, null, 2)
+    }
 
     return (
         <div className='Field_outer-wrap'>
@@ -93,7 +104,7 @@ function VinField() {
             </div>
             {display === "JSON" && clickedVin &&
                 <pre className="Field_JSON-pre">
-                    {JSON.stringify(clickedVin.vinInfo, null, 2)}
+                    {prepVinJSON(clickedVin)}
                 </pre>
             }
             {display === "EDIT" && clickedVin &&
