@@ -1,0 +1,55 @@
+.HectaSearch_table-header,
+.HectaSearch_table-entry {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
+    border-bottom: 1px solid #cecece;
+    padding: 6px;
+}
+
+.HectaSearch_table-header {
+    background-color: #d8d8d8;
+}
+
+.HectaSearch_table-header-val {
+    color: #444444;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.HectaSearch_table-entry-val {
+    color: #444444;
+    font-size: 14px;
+}
+
+.HectaSearch_table-entry-last-true {
+    border: none;
+}
+
+.HectaSearch_table-entry {
+    cursor: pointer;
+}
+
+.HectaSearch_table-entry:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+.HectaSearch_table-entry-delete {
+    height: 17px;
+    width: 17px;
+
+}
+
+.HectaSearch_table-header-delete {
+    color: #444444;
+    font-size: 14px;
+    font-weight: bold;
+    width: fit-content;
+}
+
+.HectaSearch_table-entry-val-last,
+.HectaSearch_table-header-val-last {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

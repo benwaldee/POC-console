@@ -59,6 +59,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 14px;
 }
 
 .Join_banner-exit {
@@ -90,6 +91,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .Join_banner-X:hover {

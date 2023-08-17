@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Search.css"
-import "../CSS/PentaSearch.css"
+import "../CSS/HectaSearch.css"
+import deleteImg from "../images/trash-can-solid.svg"
+import deleteImgRed from "../images/trash-can-red.svg"
+
+
 
 
 function UserSearch({ remountParent }) {
@@ -13,6 +17,8 @@ function UserSearch({ remountParent }) {
     const [matchedUsers, setMatchedUsers] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
     const [clickedDivIndex, setClickedDivIndex] = useState(null)
+    const [hoveredDeleteIdx, setHoveredDeleteIdx] = useState(null)
+
 
     const { setClickedUser } = useGeneralContext()
     const { userArr, setUserArr } = useGeneralContext()
@@ -49,6 +55,7 @@ function UserSearch({ remountParent }) {
         setClickedDivIndex(null)
 
     }, [remountParent])
+
 
     //FUNCTIONS
     //-----------------------------------------------------------------------------------------------------------
@@ -94,6 +101,15 @@ function UserSearch({ remountParent }) {
         }
     }
 
+    const handleDelete = async (userId) => {
+        try {
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/delete_user')
+
+        } catch (error) {
+            console.error("error w user delete", error)
+        }
+    }
+
 
     return (
         <>
@@ -123,27 +139,47 @@ function UserSearch({ remountParent }) {
             {displaySearchResults && userArr &&
                 <div className='Search_search-results-wrap-table'>
                     <div className='Search_flex'>
-                        <div className='PentaSearch_table-header'>
-                            <div className='PentaSearch_table-header-val'>User Id</div>
-                            <div className='PentaSearch_table-header-val'>First Name</div>
-                            <div className='PentaSearch_table-header-val'>Last Name</div>
-                            <div className='PentaSearch_table-header-val'>User Type</div>
-                            <div className='PentaSearch_table-header-val'>Active</div>
+                        <div className='HectaSearch_table-header'>
+                            <div className='HectaSearch_table-header-val'>User Id</div>
+                            <div className='HectaSearch_table-header-val'>First Name</div>
+                            <div className='HectaSearch_table-header-val'>Last Name</div>
+                            <div className='HectaSearch_table-header-val'>User Type</div>
+                            <div className='HectaSearch_table-header-val'>Active</div>
+                            <div className='HectaSearch_table-header-val-last'><div className='HectaSearch_table-header-delete'>Delete</div></div>
                         </div>
                         {matchedUsers?.map((user, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedUsers?.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
+                                className={`HectaSearch_table-entry HectaSearch_table-entry-last-${matchedUsers?.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={user.userId}
                                 onClick={() => {
                                     setClickedUser(user)
                                     setClickedDivIndex(index)
                                 }}
                             >
-                                <div className='PentaSearch_table-entry-val '>{user.userId}</div>
-                                <div className='PentaSearch_table-entry-val'>{user.firstName}</div>
-                                <div className='PentaSearch_table-entry-val'>{user.lastName}</div>
-                                <div className='PentaSearch_table-entry-val'>{translateUserType(user.userType)}</div>
-                                <div className='PentaSearch_table-entry-val'>{user.active === 1 ? "Active" : "Inactive"}</div>
+                                <div className='HectaSearch_table-entry-val '>{user.userId}</div>
+                                <div className='HectaSearch_table-entry-val'>{user.firstName}</div>
+                                <div className='HectaSearch_table-entry-val'>{user.lastName}</div>
+                                <div className='HectaSearch_table-entry-val'>{translateUserType(user.userType)}</div>
+                                <div className='HectaSearch_table-entry-val'>{user.active === 1 ? "Active" : "Inactive"}</div>
+                                {/* this is a toggle for the red vs solid svg for trash can */}
+                                {hoveredDeleteIdx !== index && <div className='HectaSearch_table-entry-val-last'>
+                                    <img className='HectaSearch_table-entry-delete'
+                                        onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                        src={deleteImg}></img
+                                    ></div>}
+                                {hoveredDeleteIdx === index && <div className='HectaSearch_table-entry-val-last'>
+                                    <img className='HectaSearch_table-entry-delete'
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            handleDelete(user.userId)
+                                            return
+                                        }}
+                                        onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                        src={deleteImgRed}></img>
+                                </div>}
+
                             </div>
 
                         )}
