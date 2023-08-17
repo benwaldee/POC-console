@@ -10,6 +10,7 @@ function Users() {
 
     const [remountParent, setRemountParent] = useState(false);
     const [showBanner, setShowBanner] = useState(false);
+    const [isDelete, setIsDelete] = useState(false)
 
     //title setter
     useEffect(() => {
@@ -20,11 +21,11 @@ function Users() {
     //then we can launch banner
     useEffect(() => {
 
-
         remountParent && setShowBanner(true)
 
         const timeoutId = setTimeout(() => {
             setShowBanner(false)
+            setIsDelete(false)
         }, 3000)
 
         setRemountParent(false)
@@ -33,8 +34,15 @@ function Users() {
     }, [remountParent])
 
     //reMounter
-    const handleRemount = () => {
-        setRemountParent(!remountParent);
+    const handleRemount = (del = false) => {
+        if (del) {
+            setIsDelete(true)
+            setRemountParent(!remountParent);
+        }
+        else {
+            setRemountParent(!remountParent);
+        }
+
     };
 
 
@@ -44,7 +52,7 @@ function Users() {
             {showBanner &&
                 <div className="Join_banner">
                     <div className="Join_banner-spacer"></div>
-                    <div className="Join_banner-text">User successfully edited</div>
+                    <div className="Join_banner-text">User successfully {isDelete ? "deleted" : "edited"}</div>
                     <div className="Join_banner-exit"
                         onClick={() => { setShowBanner(false) }}
                     >
@@ -53,7 +61,7 @@ function Users() {
                 </div>
             }
             <div className="Join_outer-wrap">
-                <div className="Join_Search-wrap">  <UserSearch remountParent={remountParent} /></div>
+                <div className="Join_Search-wrap">  <UserSearch remountParent={remountParent} handleRemount={handleRemount} /></div>
                 <div className="Join_Field-wrap">  <UserField handleRemount={handleRemount} /></div>
             </div>
             <Footer />

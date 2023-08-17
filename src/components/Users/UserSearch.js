@@ -9,7 +9,7 @@ import deleteImgRed from "../images/trash-can-red.svg"
 
 
 
-function UserSearch({ remountParent }) {
+function UserSearch({ remountParent, handleRemount }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
@@ -101,9 +101,11 @@ function UserSearch({ remountParent }) {
         }
     }
 
-    const handleDelete = async (userId) => {
+    const handleDelete = async (user) => {
         try {
-            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/delete_user')
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/delete_user', user)
+            await setClickedUser(null)
+            await handleRemount(true)
 
         } catch (error) {
             console.error("error w user delete", error)
@@ -172,7 +174,7 @@ function UserSearch({ remountParent }) {
                                     <img className='HectaSearch_table-entry-delete'
                                         onClick={(e) => {
                                             e.stopPropagation()
-                                            handleDelete(user.userId)
+                                            handleDelete(user)
                                             return
                                         }}
                                         onMouseEnter={() => { setHoveredDeleteIdx(index) }}
