@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Field.css"
+import { JSONTree } from 'react-json-tree';
 
 function LoadField({ handleRemount }) {
 
@@ -171,9 +172,13 @@ function LoadField({ handleRemount }) {
                 >Edit</button>
             </div>
             {display === "JSON" && clickedLoad &&
-                <pre className="Field_JSON-pre">
-                    {JSON.stringify(clickedLoad, null, 2)}
-                </pre>
+                // <pre className="Field_JSON-pre">
+                //     {JSON.stringify(clickedLoad, null, 2)}
+                // </pre>
+
+                <div className="Field_JSON-pre">
+                    <JSONTree data={clickedLoad} theme={{ tree: { padding: '15px', backgroundColor: '#26272F', borderRadius: '3px', minHeight: "fit-content", maxHeight: '500px', overflowY: 'auto' } }} shouldExpandNode={() => true} />
+                </div>
             }
             {display === "EDIT" && clickedLoad &&
                 <div className="Field_editForm-outer-wrap">

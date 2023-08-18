@@ -264,17 +264,8 @@ function VinSearch({ remountParent, handleRemount }) {
                     <div className='Search_search-results-empty'>No vins match the current search criteria</div>
                 </div>
             }
-
-
-
-
         </>
-
-
     );
-
-
-
 }
 
 export default VinSearch;

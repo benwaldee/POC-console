@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Field.css"
+import { JSONTree } from 'react-json-tree';
 
 function VinField({ handleRemount }) {
 
@@ -90,7 +91,7 @@ function VinField({ handleRemount }) {
         resVin.damages = vin.damages
         resVin.images = vin.images
 
-        return JSON.stringify(resVin, null, 2)
+        return resVin
     }
 
     return (
@@ -110,9 +111,13 @@ function VinField({ handleRemount }) {
                 >Edit</button>
             </div>
             {display === "JSON" && clickedVin &&
-                <pre className="Field_JSON-pre">
-                    {prepVinJSON(clickedVin)}
-                </pre>
+                // <pre className="Field_JSON-pre">
+                //     {prepVinJSON(clickedVin)}
+                // </pre>
+
+                <div className="Field_JSON-pre">
+                    <JSONTree data={prepVinJSON(clickedVin)} theme={{ tree: { padding: '15px', backgroundColor: '#26272F', borderRadius: '3px', minHeight: "fit-content", maxHeight: '500px', overflowY: 'auto' } }} shouldExpandNode={() => true} />
+                </div>
             }
             {display === "EDIT" && clickedVin &&
                 <div className="Field_editForm-outer-wrap">
