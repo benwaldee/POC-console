@@ -112,6 +112,7 @@ function LoadField({ handleRemount }) {
         editLoad.data.nextDispatch = nextDispatch
 
         delete editLoad._id
+        delete editLoad.loadNum
 
         //secure flag load
         const editLoadFlag = JSON.parse(JSON.stringify(editLoad))

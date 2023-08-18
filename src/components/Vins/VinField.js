@@ -59,6 +59,12 @@ function VinField({ handleRemount }) {
             editLoad.data.vinDeliveries[String(vinNumber)].vinInfo.type = type
         }
 
+
+        //remove tags
+        for (let vKey in editLoad.data.vinDeliveries) {
+            delete editLoad.data.vinDeliveries[vKey].loadNum
+        }
+
         delete editLoad._id
         delete editLoad.flags
 

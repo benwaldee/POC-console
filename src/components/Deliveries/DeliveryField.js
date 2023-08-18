@@ -73,6 +73,13 @@ function DeliveryField({ handleRemount }) {
         editLoad.flags.tabletDownloadStatus = tabletDownloadStatus
 
 
+
+        //remove tags
+        for (let dKey in editLoad.data.deliveries) {
+            delete editLoad.data.deliveries[dKey].loadNum
+        }
+
+
         delete editLoad._id
 
         //secure flag load
