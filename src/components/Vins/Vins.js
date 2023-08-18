@@ -10,6 +10,7 @@ function Vins() {
 
     const [remountParent, setRemountParent] = useState(false);
     const [showBanner, setShowBanner] = useState(false);
+    const [isDelete, setIsDelete] = useState(false)
 
     const { setClickedVin } = useGeneralContext()
 
@@ -33,6 +34,7 @@ function Vins() {
 
         const timeoutId = setTimeout(() => {
             setShowBanner(false)
+            setIsDelete(false)
         }, 3000)
 
         setRemountParent(false)
@@ -41,11 +43,16 @@ function Vins() {
     }, [remountParent])
 
     //reMounter
-    const handleRemount = () => {
-        setRemountParent(true);
+    const handleRemount = (del = false) => {
+        if (del) {
+            setIsDelete(true)
+            setRemountParent(!remountParent);
+        }
+        else {
+            setRemountParent(!remountParent);
+        }
+
     };
-
-
 
 
     return (
@@ -54,7 +61,7 @@ function Vins() {
             {showBanner &&
                 <div className="Join_banner">
                     <div className="Join_banner-spacer"></div>
-                    <div className="Join_banner-text">Vin successfully edited</div>
+                    <div className="Join_banner-text">Vin successfully {isDelete ? "deleted" : "edited"}</div>
                     <div className="Join_banner-exit"
                         onClick={() => { setShowBanner(false) }}
                     >
@@ -63,7 +70,7 @@ function Vins() {
                 </div>
             }
             <div className="Join_outer-wrap">
-                <div className="Join_Search-wrap">  <VinSearch remountParent={remountParent} /></div>
+                <div className="Join_Search-wrap">  <VinSearch handleRemount={handleRemount} remountParent={remountParent} /></div>
                 <div className="Join_Field-wrap">  <VinField handleRemount={handleRemount} /></div>
             </div>
             <Footer />

@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Search.css"
-import "../CSS/PentaSearch.css"
+import "../CSS/HectaSearch.css"
+import deleteImg from "../images/trash-can-solid.svg"
+import deleteImgRed from "../images/trash-can-red.svg"
 
-
-function VinSearch({ remountParent }) {
+function VinSearch({ remountParent, handleRemount }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
@@ -13,6 +14,7 @@ function VinSearch({ remountParent }) {
     const [matchedVins, setMatchedVins] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
     const [clickedDivIndex, setClickedDivIndex] = useState(null)
+    const [hoveredDeleteIdx, setHoveredDeleteIdx] = useState(null)
 
     //map for quick access to deliveries via load number
     const [vinMap, setVinMap] = useState(null)
@@ -83,6 +85,9 @@ function VinSearch({ remountParent }) {
         setMatchedVins(null)
         setDisplaySearchResults(false)
         setClickedDivIndex(null)
+        setClickedVin(null)
+        setClickedLoad(null)
+
     }, [remountParent])
 
     //FUNCTIONS
@@ -120,6 +125,49 @@ function VinSearch({ remountParent }) {
         }
     };
 
+    const handleDelete = async (vin, load) => {
+
+        //delete vin from load - everywhere i guess
+        //vin is found as a number in an array in preloads/deliveries and as the key to a map in vinDeliveries
+
+        const vinNum = Number(vin.vin)
+
+        //delete from preloads
+        for (let preKey in load.data.preloads) {
+            let newVins = []
+            for (let vin of load.data.preloads[preKey].vins) {
+                if (Number(vin) !== vinNum) { newVins.push(vin) }
+            }
+            load.data.preloads[preKey].vins = newVins
+        }
+        //delete from deliveries
+        for (let delKey in load.data.deliveries) {
+            let newVins = []
+            for (let vin of load.data.deliveries[delKey].vins) {
+                if (Number(vin) !== vinNum) { newVins.push(vin) }
+            }
+            load.data.deliveries[delKey].vins = newVins
+        }
+
+        //delete actual vin from vinDeliveries
+        for (let vinKey in load.data.vinDeliveries) {
+            if (Number(vinKey) === vinNum) {
+                delete load.data.vinDeliveries[vinKey]
+                break;
+            }
+        }
+
+        try {
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', load)
+            await setClickedLoad(null)
+            await setClickedVin(null)
+            await handleRemount(true)
+
+        } catch (error) {
+            console.error("error w vin delete", error)
+        }
+    }
+
 
     return (
         <>
@@ -149,28 +197,60 @@ function VinSearch({ remountParent }) {
             {displaySearchResults && loadArr &&
                 <div className='Search_search-results-wrap-table'>
                     <div className='Search_flex'>
-                        <div className='PentaSearch_table-header'>
-                            <div className='PentaSearch_table-header-val'>Vin Number</div>
-                            <div className='PentaSearch_table-header-val'>Load Number</div>
-                            <div className='PentaSearch_table-header-val'>Type</div>
-                            <div className='PentaSearch_table-header-val'>Color</div>
-                            <div className='PentaSearch_table-header-val'>Body</div>
+                        <div className='HectaSearch_table-header'>
+                            <div className='HectaSearch_table-header-val'>Vin Number</div>
+                            <div className='HectaSearch_table-header-val'>Load Number</div>
+                            <div className='HectaSearch_table-header-val'>Type</div>
+                            <div className='HectaSearch_table-header-val'>Color</div>
+                            <div className='HectaSearch_table-header-val'>Body</div>
+                            <div className='HectaSearch_table-header-val-last'><div className='HectaSearch_table-header-delete'>Delete</div></div>
                         </div>
                         {matchedVins?.map((vin, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedVins.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
+                                className={`HectaSearch_table-entry HectaSearch_table-entry-last-${matchedVins.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={vin.vinInfo.vin_number}
                                 onClick={() => {
                                     setClickedVin(vin)
                                     setClickedLoad(loadMap[vin.loadNum])
                                     setClickedDivIndex(index)
                                 }}
+                                onMouseLeave={() => { setHoveredDeleteIdx(null) }}
                             >
-                                <div className='PentaSearch_table-entry-val '>{vin.vinInfo.vin_number}</div>
-                                <div className='PentaSearch_table-entry-val '>{vin.loadNum}</div>
-                                <div className='PentaSearch_table-entry-val'>{vin.vinInfo.type}</div>
-                                <div className='PentaSearch_table-entry-val'>{vin.vinInfo.color}</div>
-                                <div className='PentaSearch_table-entry-val'>{vin.vinInfo.body}</div>
+                                <div className='HectaSearch_table-entry-val '>{vin.vinInfo.vin_number}</div>
+                                <div className='HectaSearch_table-entry-val '>{vin.loadNum}</div>
+                                <div className='HectaSearch_table-entry-val'>{vin.vinInfo.type}</div>
+                                <div className='HectaSearch_table-entry-val'>{vin.vinInfo.color}</div>
+                                <div className='HectaSearch_table-entry-val'>{vin.vinInfo.body}</div>
+                                {/* this is a toggle for the red vs solid svg for trash can */}
+                                {hoveredDeleteIdx !== index &&
+                                    <div
+                                        className='HectaSearch_table-entry-val-last'
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                    >
+                                        <img className='HectaSearch_table-entry-delete'
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImg}>
+                                        </img>
+                                    </div>
+                                }
+                                {hoveredDeleteIdx === index &&
+                                    <div
+                                        className='HectaSearch_table-entry-val-last'
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                    >
+                                        <img className='HectaSearch_table-entry-delete'
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleDelete(vin, loadMap[vin.loadNum])
+                                                return
+                                            }}
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImgRed}>
+                                        </img>
+                                    </div>
+                                }
                             </div>
 
                         )}
