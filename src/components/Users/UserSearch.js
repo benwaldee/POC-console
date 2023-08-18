@@ -53,6 +53,7 @@ function UserSearch({ remountParent, handleRemount }) {
         setMatchedUsers(null)
         setDisplaySearchResults(false)
         setClickedDivIndex(null)
+        setClickedUser(null)
 
     }, [remountParent])
 
@@ -157,6 +158,7 @@ function UserSearch({ remountParent, handleRemount }) {
                                     setClickedUser(user)
                                     setClickedDivIndex(index)
                                 }}
+                                onMouseLeave={() => { setHoveredDeleteIdx(null) }}
                             >
                                 <div className='HectaSearch_table-entry-val '>{user.userId}</div>
                                 <div className='HectaSearch_table-entry-val'>{user.firstName}</div>
@@ -164,13 +166,15 @@ function UserSearch({ remountParent, handleRemount }) {
                                 <div className='HectaSearch_table-entry-val'>{translateUserType(user.userType)}</div>
                                 <div className='HectaSearch_table-entry-val'>{user.active === 1 ? "Active" : "Inactive"}</div>
                                 {/* this is a toggle for the red vs solid svg for trash can */}
-                                {hoveredDeleteIdx !== index && <div className='HectaSearch_table-entry-val-last'>
+                                {hoveredDeleteIdx !== index && <div className='HectaSearch_table-entry-val-last'
+                                    onMouseLeave={() => { setHoveredDeleteIdx(null) }}>
                                     <img className='HectaSearch_table-entry-delete'
                                         onMouseEnter={() => { setHoveredDeleteIdx(index) }}
                                         onMouseLeave={() => { setHoveredDeleteIdx(null) }}
                                         src={deleteImg}></img
                                     ></div>}
-                                {hoveredDeleteIdx === index && <div className='HectaSearch_table-entry-val-last'>
+                                {hoveredDeleteIdx === index && <div className='HectaSearch_table-entry-val-last'
+                                    onMouseLeave={() => { setHoveredDeleteIdx(null) }}>
                                     <img className='HectaSearch_table-entry-delete'
                                         onClick={(e) => {
                                             e.stopPropagation()
