@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Search.css"
-import "../CSS/PentaSearch.css"
+import "../CSS/HectaSearch.css"
+import deleteImg from "../images/trash-can-solid.svg"
+import deleteImgRed from "../images/trash-can-red.svg"
 
 
-function DeliverySearch({ remountParent }) {
+function DeliverySearch({ remountParent, handleRemount }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
@@ -13,6 +15,7 @@ function DeliverySearch({ remountParent }) {
     const [matchedDeliveries, setMatchedDeliveries] = useState([])
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
     const [clickedDivIndex, setClickedDivIndex] = useState(null)
+    const [hoveredDeleteIdx, setHoveredDeleteIdx] = useState(null)
 
 
     //map for quick access to deliveries via load number
@@ -83,6 +86,8 @@ function DeliverySearch({ remountParent }) {
         setMatchedDeliveries(null)
         setDisplaySearchResults(false)
         setClickedDivIndex(null)
+        setClickedDelivery(null)
+        setClickedLoad(null)
 
     }, [remountParent])
 
@@ -121,6 +126,25 @@ function DeliverySearch({ remountParent }) {
         }
     };
 
+    const handleDelete = async (delivery, load) => {
+        // console.log(delivery)
+        // console.log(load)
+        // return
+        //delete delivery from load - may add fxn to delete all associated vins as well
+        const deliveryKey = `${delivery.dealer.customerNumber}-${delivery.dealer.mfg}`
+        delete load.data.deliveries[deliveryKey]
+
+        try {
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', load)
+            await setClickedLoad(null)
+            await setClickedDelivery(null)
+            await handleRemount(true)
+
+        } catch (error) {
+            console.error("error w delivery delete", error)
+        }
+    }
+
 
     return (
         <>
@@ -150,28 +174,60 @@ function DeliverySearch({ remountParent }) {
             {displaySearchResults && loadArr &&
                 <div className='Search_search-results-wrap-table'>
                     <div className='Search_flex'>
-                        <div className='PentaSearch_table-header'>
-                            <div className='PentaSearch_table-header-val'>Load Number</div>
-                            <div className='PentaSearch_table-header-val'>Customer Number</div>
-                            <div className='PentaSearch_table-header-val'>Dealer</div>
-                            <div className='PentaSearch_table-header-val'>Ship Date</div>
-                            <div className='PentaSearch_table-header-val'>Delivery Date</div>
+                        <div className='HectaSearch_table-header'>
+                            <div className='HectaSearch_table-header-val'>Load Number</div>
+                            <div className='HectaSearch_table-header-val'>Customer Number</div>
+                            <div className='HectaSearch_table-header-val'>Dealer</div>
+                            <div className='HectaSearch_table-header-val'>Ship Date</div>
+                            <div className='HectaSearch_table-header-val'>Delivery Date</div>
+                            <div className='HectaSearch_table-header-val-last'><div className='HectaSearch_table-header-delete'>Delete</div></div>
                         </div>
                         {matchedDeliveries?.map((delivery, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedDeliveries.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
+                                className={`HectaSearch_table-entry HectaSearch_table-entry-last-${matchedDeliveries.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={`${delivery.dealer.customerNumber}-${delivery.dealer.mfg}-${delivery.loadNum}`}
                                 onClick={() => {
                                     setClickedDelivery(delivery)
                                     setClickedLoad(loadMap[delivery.loadNum])
                                     setClickedDivIndex(index)
                                 }}
+                                onMouseLeave={() => { setHoveredDeleteIdx(null) }}
                             >
-                                <div className='PentaSearch_table-entry-val '>{delivery.loadNum}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.dealer.customerNumber}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.dealer.customerName}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.shipDate}</div>
-                                <div className='PentaSearch_table-entry-val'>{delivery.estDeliverDate}</div>
+                                <div className='HectaSearch_table-entry-val '>{delivery.loadNum}</div>
+                                <div className='HectaSearch_table-entry-val'>{delivery.dealer.customerNumber}</div>
+                                <div className='HectaSearch_table-entry-val'>{delivery.dealer.customerName}</div>
+                                <div className='HectaSearch_table-entry-val'>{delivery.shipDate}</div>
+                                <div className='HectaSearch_table-entry-val'>{delivery.estDeliverDate}</div>
+                                {/* this is a toggle for the red vs solid svg for trash can */}
+                                {hoveredDeleteIdx !== index &&
+                                    <div
+                                        className='HectaSearch_table-entry-val-last'
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                    >
+                                        <img className='HectaSearch_table-entry-delete'
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImg}>
+                                        </img>
+                                    </div>
+                                }
+                                {hoveredDeleteIdx === index &&
+                                    <div
+                                        className='HectaSearch_table-entry-val-last'
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                    >
+                                        <img className='HectaSearch_table-entry-delete'
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleDelete(delivery, loadMap[delivery.loadNum])
+                                                return
+                                            }}
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImgRed}>
+                                        </img>
+                                    </div>
+                                }
                             </div>
 
                         )}
