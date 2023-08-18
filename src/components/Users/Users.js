@@ -19,6 +19,7 @@ function Users() {
 
     //watch for remount parent to change - only changes when a user submits an edit (if statement covers onMount)
     //then we can launch banner
+    //now includes the delete event - triggered from UserSearch
     useEffect(() => {
 
         remountParent && setShowBanner(true)

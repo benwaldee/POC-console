@@ -10,6 +10,7 @@ function Loads() {
 
     const [remountParent, setRemountParent] = useState(false);
     const [showBanner, setShowBanner] = useState(false);
+    const [isDelete, setIsDelete] = useState(false)
 
     const { clickedLoad, setClickedLoad } = useGeneralContext()
 
@@ -26,6 +27,7 @@ function Loads() {
 
     //watch for remount parent to change - only changes when a user submits an edit (if statement covers onMount)
     //then we can launch banner
+    //now includes the delete event - triggered from UserSearch
     useEffect(() => {
 
 
@@ -33,6 +35,7 @@ function Loads() {
 
         const timeoutId = setTimeout(() => {
             setShowBanner(false)
+            setIsDelete(false)
         }, 3000)
 
         setRemountParent(false)
@@ -41,8 +44,15 @@ function Loads() {
     }, [remountParent])
 
     //reMounter
-    const handleRemount = () => {
+    const handleRemount = (del = false) => {
         setRemountParent(!remountParent);
+        if (del) {
+            setIsDelete(true)
+            setRemountParent(!remountParent);
+        }
+        else {
+            setRemountParent(!remountParent);
+        }
     };
 
 
@@ -52,7 +62,7 @@ function Loads() {
             {showBanner &&
                 <div className="Join_banner">
                     <div className="Join_banner-spacer"></div>
-                    <div className="Join_banner-text">Load successfully edited</div>
+                    <div className="Join_banner-text">Load successfully {isDelete ? "deleted" : "edited"}</div>
                     <div className="Join_banner-exit"
                         onClick={() => { setShowBanner(false) }}
                     >
@@ -61,7 +71,7 @@ function Loads() {
                 </div>
             }
             <div className="Join_outer-wrap">
-                <div className="Join_Search-wrap">  <LoadSearch remountParent={remountParent} /></div>
+                <div className="Join_Search-wrap">  <LoadSearch remountParent={remountParent} handleRemount={handleRemount} /></div>
                 <div className="Join_Field-wrap">  <LoadField handleRemount={handleRemount} /></div>
             </div>
             <Footer />

@@ -166,30 +166,37 @@ function UserSearch({ remountParent, handleRemount }) {
                                 <div className='HectaSearch_table-entry-val'>{translateUserType(user.userType)}</div>
                                 <div className='HectaSearch_table-entry-val'>{user.active === 1 ? "Active" : "Inactive"}</div>
                                 {/* this is a toggle for the red vs solid svg for trash can */}
-                                {hoveredDeleteIdx !== index && <div className='HectaSearch_table-entry-val-last'
-                                    onMouseLeave={() => { setHoveredDeleteIdx(null) }}>
-                                    <img className='HectaSearch_table-entry-delete'
-                                        onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                {hoveredDeleteIdx !== index &&
+                                    <div
+                                        className='HectaSearch_table-entry-val-last'
                                         onMouseLeave={() => { setHoveredDeleteIdx(null) }}
-                                        src={deleteImg}></img
-                                    ></div>}
-                                {hoveredDeleteIdx === index && <div className='HectaSearch_table-entry-val-last'
-                                    onMouseLeave={() => { setHoveredDeleteIdx(null) }}>
-                                    <img className='HectaSearch_table-entry-delete'
-                                        onClick={(e) => {
-                                            e.stopPropagation()
-                                            handleDelete(user)
-                                            return
-                                        }}
-                                        onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                    >
+                                        <img className='HectaSearch_table-entry-delete'
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImg}>
+                                        </img>
+                                    </div>
+                                }
+                                {hoveredDeleteIdx === index &&
+                                    <div
+                                        className='HectaSearch_table-entry-val-last'
                                         onMouseLeave={() => { setHoveredDeleteIdx(null) }}
-                                        src={deleteImgRed}></img>
-                                </div>}
-
+                                    >
+                                        <img className='HectaSearch_table-entry-delete'
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleDelete(user)
+                                                return
+                                            }}
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImgRed}>
+                                        </img>
+                                    </div>
+                                }
                             </div>
-
                         )}
-
                     </div>
                 </div>
             }
@@ -199,17 +206,8 @@ function UserSearch({ remountParent, handleRemount }) {
                     <div className='Search_search-results-empty'>No users match the current search criteria</div>
                 </div>
             }
-
-
-
-
         </>
-
-
     );
-
-
-
 }
 
 export default UserSearch;

@@ -1,7 +1,7 @@
 .PentaSearch_table-header,
 .PentaSearch_table-entry {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
     border-bottom: 1px solid #cecece;
     padding: 6px;
 }
@@ -32,4 +32,24 @@
 .PentaSearch_table-entry:hover {
     cursor: pointer;
     background-color: #f1f1f1;
+}
+
+.PentaSearch_table-entry-delete {
+    height: 17px;
+    width: 17px;
+
+}
+
+.PentaSearch_table-header-delete {
+    color: #444444;
+    font-size: 14px;
+    font-weight: bold;
+    width: fit-content;
+}
+
+.PentaSearch_table-entry-val-last,
+.PentaSearch_table-header-val-last {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

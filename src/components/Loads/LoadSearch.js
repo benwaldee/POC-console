@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
-import "../CSS/Search.css"
+import "../CSS/PentaSearch.css"
+import deleteImg from "../images/trash-can-solid.svg"
+import deleteImgRed from "../images/trash-can-red.svg"
 
 
-function LoadSearch({ remountParent }) {
+function LoadSearch({ remountParent, handleRemount }) {
 
     //STATE VARS
     //------------------------------------------------------------------------------------------------------------
@@ -12,6 +14,7 @@ function LoadSearch({ remountParent }) {
     const [matchedLoads, setMatchedLoads] = useState(null)
     const [displaySearchResults, setDisplaySearchResults] = useState(false)
     const [clickedDivIndex, setClickedDivIndex] = useState(null)
+    const [hoveredDeleteIdx, setHoveredDeleteIdx] = useState(null)
 
     const { setClickedLoad } = useGeneralContext()
     const { loadArr, setLoadArr } = useGeneralContext()
@@ -47,6 +50,8 @@ function LoadSearch({ remountParent }) {
         setMatchedLoads(null)
         setDisplaySearchResults(false)
         setClickedDivIndex(null)
+
+
     }, [remountParent])
 
     //FUNCTIONS
@@ -82,6 +87,20 @@ function LoadSearch({ remountParent }) {
         }
     };
 
+    //loads and users (as of right now) are the only items that have their own collections, thus triggering
+    //an actual delete route - others will simply save a new load
+    const handleDelete = async (load) => {
+
+        try {
+            await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/delete_load', { loadNum: load.data.loadNum, version: "" })
+            await setClickedLoad(null)
+            await handleRemount(true)
+
+        } catch (error) {
+            console.error("error w load delete", error)
+        }
+    }
+
 
     return (
         <>
@@ -111,25 +130,57 @@ function LoadSearch({ remountParent }) {
             {displaySearchResults && loadArr &&
                 <div className='Search_search-results-wrap-table'>
                     <div className='Search_flex'>
-                        <div className='Search_table-header'>
-                            <div className='Search_table-header-val'>Load</div>
-                            <div className='Search_table-header-val'>Load Type</div>
-                            <div className='Search_table-header-val'>Truck</div>
-                            <div className='Search_table-header-val'>Driver</div>
+                        <div className='PentaSearch_table-header'>
+                            <div className='PentaSearch_table-header-val'>Load</div>
+                            <div className='PentaSearch_table-header-val'>Load Type</div>
+                            <div className='PentaSearch_table-header-val'>Truck</div>
+                            <div className='PentaSearch_table-header-val'>Driver</div>
+                            <div className='PentaSearch_table-header-val-last'><div className='PentaSearch_table-header-delete'>Delete</div></div>
                         </div>
                         {matchedLoads?.map((load, index) =>
                             <div
-                                className={`Search_table-entry Search_table-entry-last-${matchedLoads.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
+                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedLoads.length - 1 === index} PentaSearch_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={load.data.loadNum}
                                 onClick={() => {
                                     setClickedLoad(load)
                                     setClickedDivIndex(index)
                                 }}
+                                onMouseLeave={() => { setHoveredDeleteIdx(null) }}
                             >
-                                <div className='Search_table-entry-val '>{load.data.loadNum}</div>
-                                <div className='Search_table-entry-val'>{load.data.loadType}</div>
-                                <div className='Search_table-entry-val'>{load.data.truckNum}</div>
-                                <div className='Search_table-entry-val'>{load.data.userId}</div>
+                                <div className='PentaSearch_table-entry-val '>{load.data.loadNum}</div>
+                                <div className='PentaSearch_table-entry-val'>{load.data.loadType}</div>
+                                <div className='PentaSearch_table-entry-val'>{load.data.truckNum}</div>
+                                <div className='PentaSearch_table-entry-val'>{load.data.userId}</div>
+                                {/* this is a toggle for the red vs solid svg for trash can */}
+                                {hoveredDeleteIdx !== index &&
+                                    <div
+                                        className='PentaSearch_table-entry-val-last'
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                    >
+                                        <img className='PentaSearch_table-entry-delete'
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImg}>
+                                        </img>
+                                    </div>
+                                }
+                                {hoveredDeleteIdx === index &&
+                                    <div
+                                        className='PentaSearch_table-entry-val-last'
+                                        onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                    >
+                                        <img className='PentaSearch_table-entry-delete'
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                handleDelete(load)
+                                                return
+                                            }}
+                                            onMouseEnter={() => { setHoveredDeleteIdx(index) }}
+                                            onMouseLeave={() => { setHoveredDeleteIdx(null) }}
+                                            src={deleteImgRed}>
+                                        </img>
+                                    </div>
+                                }
                             </div>
 
                         )}
