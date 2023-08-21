@@ -261,8 +261,6 @@ function DeliveryField({ handleRemount }) {
                     <div className='Field_table-wrap'>
                         <div className='Field_table-label'>LOAD #</div>
                         <div className='Field_table-item'>{clickedDelivery.loadNum}</div>
-                        <div className='Field_table-label'>DEALER</div>
-                        <div className='Field_table-item'>{clickedDelivery.dealer.customerName}</div>
                         <div className='Field_table-label'>SHIPPING DATE</div>
                         <div className='Field_table-item'>{clickedDelivery.shipDate}</div>
                         <div className='Field_table-label'>DELIVERY DATE</div>
@@ -277,6 +275,18 @@ function DeliveryField({ handleRemount }) {
                         <div className='Field_table-item'>{clickedDelivery.notes}</div>
                         <div className='Field_table-label'>DEALER DELIVERY SIGNATURE</div>
                         <div className='Field_table-item'>{clickedDelivery.dealerSignature}</div>
+                    </div>
+
+                    <div className='Field_table-title Field_table-margin-top'>Dealer Info</div>
+                    <div className='Field_table-wrap'>
+                        <div className='Field_table-label'>MANUFACTURER</div>
+                        <div className='Field_table-item'>{clickedDelivery.dealer.mfg}</div>
+                        <div className='Field_table-label'>NAME</div>
+                        <div className='Field_table-item'>{clickedDelivery.dealer.customerName}</div>
+                        <div className='Field_table-label'>CUSTOMER ID</div>
+                        <div className='Field_table-item'>{clickedDelivery.dealer.customerNumber}</div>
+                        <div className='Field_table-label'>ADDRESS</div>
+                        <div className='Field_table-item'>{clickedDelivery.dealer.address}</div>
                     </div>
                 </>
             }

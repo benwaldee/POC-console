@@ -171,3 +171,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
+
+.Field_table-margin-top {
+    margin-top: 20px;
+}
