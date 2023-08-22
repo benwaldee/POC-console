@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Field.css"
 import { JSONTree } from 'react-json-tree';
+import CreateLoadForm from './CreateLoadForm.js'
 
 function LoadField({ handleRemount }) {
 
@@ -132,7 +133,9 @@ function LoadField({ handleRemount }) {
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', editLoad)
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/set_load_flags', editLoadFlag)
             await setClickedLoad(null)
+            await setDisplay("TABLE")
             await handleRemount('edited')
+
 
         } catch (error) {
             console.error("error w loads", error)
@@ -170,6 +173,9 @@ function LoadField({ handleRemount }) {
         if (dupLoadNum === '') {
             setDupError(true)
             return
+        } else if (Number(dupLoadNum) === Number(clickedLoad.data.loadNum)) {
+            setDupError(true)
+            return
         }
 
         const dupLoad = { data: clickedLoad.data }
@@ -178,6 +184,7 @@ function LoadField({ handleRemount }) {
         await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/upload_load', dupLoad)
         await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', dupLoad)
         await setClickedLoad(null)
+        await setDisplay("TABLE")
         await handleRemount('duplicated')
 
         // console.log(clickedLoad, dupLoadNum)
@@ -206,10 +213,6 @@ function LoadField({ handleRemount }) {
                     className={`Field_display-button-blue Field_display-button Field_display-button-clicked-${display === "DUPE"}`}
                     onClick={() => setDisplay("DUPE")}
                 >Duplicate</button>
-                <button
-                    className={`Field_display-button-blue  Field_display-button Field_display-button-clicked-${display === "CREATE"}`}
-                    onClick={() => setDisplay("CREATE")}
-                >Create</button>
             </div>
             {display === "JSON" && clickedLoad &&
                 // <pre className="Field_JSON-pre">
