@@ -139,7 +139,7 @@ function LoadSearch({ remountParent, handleRemount }) {
                         </div>
                         {matchedLoads?.map((load, index) =>
                             <div
-                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedLoads.length - 1 === index} PentaSearch_table-entry-clicked-${index === clickedDivIndex}`}
+                                className={`PentaSearch_table-entry PentaSearch_table-entry-last-${matchedLoads.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
                                 key={load.data.loadNum}
                                 onClick={() => {
                                     setClickedLoad(load)

@@ -40,6 +40,9 @@ function LoadField({ handleRemount }) {
     const [firstDrop, setFirstDrop] = useState("")
     const [lastDrop, setLastDrop] = useState("")
     const [nextDispatch, setNextDispatch] = useState("")
+    //dupe
+    const [dupLoadNum, setDupLoadNum] = useState(null)
+    const [dupError, setDupError] = useState(false)
 
     //USE EFFECTS
     //-------------------------------------------------------------------------------------------
@@ -72,6 +75,8 @@ function LoadField({ handleRemount }) {
             setFirstDrop(clickedLoad.data.firstDrop)
             setLastDrop(clickedLoad.data.lastDrop)
             setNextDispatch(clickedLoad.data.nextDispatch)
+
+            setDupLoadNum('')
         }
 
 
@@ -154,6 +159,23 @@ function LoadField({ handleRemount }) {
     }
 
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleDup(clickedLoad, dupLoadNum)
+        }
+    };
+
+
+    const handleDup = (clickedLoad, dupLoadNum) => {
+        if (dupLoadNum === '') {
+            setDupError(true)
+            return
+        }
+
+        console.log(clickedLoad, dupLoadNum)
+    }
+
+
 
     return (
         <div className='Field_outer-wrap'>
@@ -170,6 +192,10 @@ function LoadField({ handleRemount }) {
                     className="Field_display-button"
                     onClick={() => setDisplay("EDIT")}
                 >Edit</button>
+                <button
+                    className="Field_display-button Field_display-button-dupe"
+                    onClick={() => setDisplay("DUPE")}
+                >Duplicate</button>
             </div>
             {display === "JSON" && clickedLoad &&
                 // <pre className="Field_JSON-pre">
@@ -270,6 +296,7 @@ function LoadField({ handleRemount }) {
                         <div className='Field_editForm-data-wrap'>
                             <label className='Field_edit-label' htmlFor="loadNum">loadNum</label>
                             <input
+                                disabled
                                 id="loadNum"
                                 className='Field_edit-input'
                                 type='number'
@@ -423,6 +450,31 @@ function LoadField({ handleRemount }) {
 
                     </div>
                 </>
+            }
+            {display === "DUPE" && clickedLoad &&
+                <div className='Field_dupe-wrap'>
+
+                    <label className="Field_dupe-label" htmlFor="load#">New load number:</label>
+                    <input
+                        id='load#'
+                        className='Field_dupe-field'
+                        type='number'
+                        value={dupLoadNum}
+                        onChange={(e) => {
+                            setDupLoadNum(Number(e.target.value))
+                            setDupError(false)
+                        }}
+                        maxLength={50}
+                        onKeyDown={handleKeyPress}
+                        min={0}
+                    ></input>
+                    {dupError && <div className='Field_dupe-error'> Please enter a new load number</div>}
+                    <button
+                        className='Field_dupe-button-create'
+                        onClick={() => handleDup(clickedLoad, dupLoadNum)}
+                    >CREATE</button>
+
+                </div>
             }
         </div >
     );

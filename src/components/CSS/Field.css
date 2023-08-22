@@ -175,3 +175,67 @@
 .Field_table-margin-top {
     margin-top: 20px;
 }
+
+.Field_display-button-dupe,
+.Field_dupe-button-create {
+    background-color: #4c91ca;
+}
+
+.Field_display-button-dupe:hover,
+.Field_dupe-button-create:hover {
+    background-color: #73a3ca;
+}
+
+.Field_dupe-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.Field_dupe-button-create {
+    height: 30px;
+    font-size: 12px;
+    padding: 15px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px;
+}
+
+.Field_dupe-label {
+    font-size: 11px;
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
+    color: #444444;
+    font-weight: bold;
+    margin-bottom: 4px;
+
+}
+
+.Field_dupe-field {
+    padding: 8px 6px !important;
+    font-size: 12px;
+    color: #444444;
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
+    border: solid 1px #d5d5d5;
+    min-width: 300px;
+    outline: none;
+
+}
+
+.Field_dupe-field:focus {
+    border: solid 1px #afafaf;
+}
+
+.Field_dupe-error {
+    font-size: 11px;
+    font-family: Arial, Tahoma, Helvetica, sans-serif;
+    color: #f05454;
+    font-weight: bold;
+    margin-top: 4px;
+}
