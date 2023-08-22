@@ -10,7 +10,7 @@ function Loads() {
 
     const [remountParent, setRemountParent] = useState(false);
     const [showBanner, setShowBanner] = useState(false);
-    const [isDelete, setIsDelete] = useState(false)
+    const [bannerType, setBannerType] = useState(null)
 
     const { clickedLoad, setClickedLoad } = useGeneralContext()
 
@@ -35,7 +35,7 @@ function Loads() {
 
         const timeoutId = setTimeout(() => {
             setShowBanner(false)
-            setIsDelete(false)
+            setBannerType(null)
         }, 3000)
 
         setRemountParent(false)
@@ -44,15 +44,9 @@ function Loads() {
     }, [remountParent])
 
     //reMounter
-    const handleRemount = (del = false) => {
+    const handleRemount = (condition) => {
+        setBannerType(condition)
         setRemountParent(!remountParent);
-        if (del) {
-            setIsDelete(true)
-            setRemountParent(!remountParent);
-        }
-        else {
-            setRemountParent(!remountParent);
-        }
     };
 
 
@@ -62,7 +56,7 @@ function Loads() {
             {showBanner &&
                 <div className="Join_banner">
                     <div className="Join_banner-spacer"></div>
-                    <div className="Join_banner-text">Load successfully {isDelete ? "deleted" : "edited"}</div>
+                    <div className="Join_banner-text">Load successfully {bannerType}</div>
                     <div className="Join_banner-exit"
                         onClick={() => { setShowBanner(false) }}
                     >

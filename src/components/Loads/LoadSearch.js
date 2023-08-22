@@ -94,7 +94,7 @@ function LoadSearch({ remountParent, handleRemount }) {
         try {
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/delete_load', { loadNum: load.data.loadNum, version: "" })
             await setClickedLoad(null)
-            await handleRemount(true)
+            await handleRemount('deleted')
 
         } catch (error) {
             console.error("error w load delete", error)

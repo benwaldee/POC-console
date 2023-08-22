@@ -132,7 +132,7 @@ function LoadField({ handleRemount }) {
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', editLoad)
             await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/set_load_flags', editLoadFlag)
             await setClickedLoad(null)
-            await handleRemount()
+            await handleRemount('edited')
 
         } catch (error) {
             console.error("error w loads", error)
@@ -166,13 +166,21 @@ function LoadField({ handleRemount }) {
     };
 
 
-    const handleDup = (clickedLoad, dupLoadNum) => {
+    const handleDup = async (clickedLoad, dupLoadNum) => {
         if (dupLoadNum === '') {
             setDupError(true)
             return
         }
 
-        console.log(clickedLoad, dupLoadNum)
+        const dupLoad = { data: clickedLoad.data }
+        dupLoad.data.loadNum = dupLoadNum
+
+        await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/upload_load', dupLoad)
+        await axios.post('https://4kdavonrj6.execute-api.us-east-1.amazonaws.com/v1/save_load', dupLoad)
+        await setClickedLoad(null)
+        await handleRemount('duplicated')
+
+        // console.log(clickedLoad, dupLoadNum)
     }
 
 
