@@ -189,21 +189,27 @@ function LoadField({ handleRemount }) {
         <div className='Field_outer-wrap'>
             <div className="Field_button-wrap">
                 <button
-                    className="Field_display-button"
-                    onClick={() => setDisplay("TABLE")}
+                    className={`Field_display-button Field_display-button-clicked-${display === "TABLE"}`}
+                    onClick={() => {
+                        setDisplay("TABLE")
+                    }}
                 >Table</button>
                 <button
-                    className="Field_display-button"
+                    className={`Field_display-button Field_display-button-clicked-${display === "JSON"}`}
                     onClick={() => setDisplay("JSON")}
                 >JSON</button>
                 <button
-                    className="Field_display-button"
+                    className={`Field_display-button Field_display-button-clicked-${display === "EDIT"}`}
                     onClick={() => setDisplay("EDIT")}
                 >Edit</button>
                 <button
-                    className="Field_display-button Field_display-button-dupe"
+                    className={`Field_display-button-blue Field_display-button Field_display-button-clicked-${display === "DUPE"}`}
                     onClick={() => setDisplay("DUPE")}
                 >Duplicate</button>
+                <button
+                    className={`Field_display-button-blue  Field_display-button Field_display-button-clicked-${display === "CREATE"}`}
+                    onClick={() => setDisplay("CREATE")}
+                >Create</button>
             </div>
             {display === "JSON" && clickedLoad &&
                 // <pre className="Field_JSON-pre">

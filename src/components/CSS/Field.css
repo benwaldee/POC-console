@@ -176,12 +176,12 @@
     margin-top: 20px;
 }
 
-.Field_display-button-dupe,
+.Field_display-button-blue,
 .Field_dupe-button-create {
     background-color: #4c91ca;
 }
 
-.Field_display-button-dupe:hover,
+.Field_display-button-blue:hover,
 .Field_dupe-button-create:hover {
     background-color: #73a3ca;
 }
@@ -238,4 +238,9 @@
     color: #f05454;
     font-weight: bold;
     margin-top: 4px;
+}
+
+.Field_display-button-clicked-true {
+    height: 35px;
+    width: 85px;
 }
