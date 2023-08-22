@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useGeneralContext } from '../../context/GeneralContext';
 import "../CSS/Field.css"
 import { JSONTree } from 'react-json-tree';
-import CreateLoadForm from './CreateLoadForm.js'
+
 
 function LoadField({ handleRemount }) {
 
@@ -193,10 +193,10 @@ function LoadField({ handleRemount }) {
 
 
     return (
-        <div className='Field_outer-wrap'>
+        <div className='Field_outer-wrap-loads'>
             <div className="Field_button-wrap">
                 <button
-                    className={`Field_display-button Field_display-button-clicked-${display === "TABLE"}`}
+                    className={`Field_display-button  Field_display-button-clicked-${display === "TABLE"}`}
                     onClick={() => {
                         setDisplay("TABLE")
                     }}

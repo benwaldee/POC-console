@@ -1,3 +1,13 @@
+.Join_title {
+    color: #444444;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-shadow: 0 1px #FFFFFF;
+    margin-left: 28.6px;
+    margin-right: 28.6px;
+    margin-top: 20px;
+}
+
 .Join_outer-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -96,4 +106,28 @@
 
 .Join_banner-X:hover {
     background-color: #98e6a8;
+}
+
+.Join_Create-button {
+    height: 35px;
+    font-size: 12px;
+    padding: 15px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #4c91ca;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-right: 10px;
+    margin-left: 28.6px;
+    margin-bottom: 10px;
+}
+
+.Join_Create-button:hover {
+    background-color: #73a3ca;
 }

@@ -104,7 +104,6 @@ function LoadSearch({ remountParent, handleRemount }) {
 
     return (
         <>
-            <h1 className='Search_title'>LOADS</h1>
             <div className='Search_search-box'>
                 <label className="Search_search-label" htmlFor="load#">Load # :</label>
                 <input

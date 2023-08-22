@@ -12,7 +12,8 @@
     width: 200px;
 }
 
-.Field_outer-wrap {
+.Field_outer-wrap,
+.Field_outer-wrap-loads {
     width: fit-content;
     height: fit-content;
     padding: 20px;
@@ -22,8 +23,14 @@
     margin-top: 63px;
 }
 
+.Field_outer-wrap-loads {
+    margin-top: 10px;
+}
+
 @media (max-width: 1000px) {
-    .Field_outer-wrap {
+
+    .Field_outer-wrap,
+    .Field_outer-wrap-loads {
         margin-top: 33px;
     }
 
