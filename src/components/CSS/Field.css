@@ -51,6 +51,8 @@
     margin-right: 10px;
 }
 
+
+
 .Field_editForm-flags-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -117,7 +119,8 @@
     margin-left: 67px;
 }
 
-.Field_edit_save:hover {
+.Field_edit_save:hover,
+.Field_create-button:hover {
     background-color: #696969;
 }
 
@@ -250,4 +253,78 @@
 .Field_display-button-clicked-true {
     height: 35px;
     width: 85px;
+}
+
+.Field_create-subtitle {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    border-bottom: 1px solid #c2c2c2;
+    padding-bottom: 7px;
+    font-size: 18px;
+}
+
+.Field_create-tabs {
+    display: flex;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.Field_create-tab-option {
+    height: 0px;
+    width: 70px;
+    margin-top: 10px;
+    border: 1px solid #4c91ca
+}
+
+
+
+.Field_create-tab-option-selected-true {
+    border-bottom: 1.85px inset #525252
+}
+
+.Field_create-button {
+    height: 40px;
+    font-size: 12px;
+    padding: 15px;
+    width: 285px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #525252;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px;
+
+}
+
+.Field_create-button-wrap {
+    display: flex;
+}
+
+.Field_dummy-button {
+    height: 40px;
+    font-size: 12px;
+    padding: 15px;
+    width: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #138d64;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.Field_dummy-button:hover {
+    background-color: #138d64d3;
 }

@@ -5,14 +5,14 @@ import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { useGeneralContext } from '../../context/GeneralContext';
 import { useEffect, useState } from "react";
-import CreateLoadForm from './CreateLoadForm.js'
+import CreateLoadModal from './CreateLoadModal'
 
 function Loads() {
 
     const [remountParent, setRemountParent] = useState(false);
     const [showBanner, setShowBanner] = useState(false);
     const [bannerType, setBannerType] = useState(null)
-    const [showCreateForm, setShowCreateForm] = useState(false)
+
 
     const { clickedLoad, setClickedLoad } = useGeneralContext()
 
@@ -57,12 +57,7 @@ function Loads() {
             <Navbar />
             <h1 className='Join_title'>LOADS</h1>
             <div className="Join_Create-wrap">
-                <button
-                    className="Join_Create-button"
-                >
-                    Create a new load
-                </button>
-                {showCreateForm && <CreateLoadForm handleRemount={handleRemount} />}
+                <CreateLoadModal handleRemount={handleRemount} />
             </div>
             {showBanner &&
                 <div className="Join_banner">
