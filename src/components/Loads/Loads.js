@@ -57,7 +57,9 @@ function Loads() {
             <Navbar />
             <h1 className='Join_title'>LOADS</h1>
             <div className="Join_Create-wrap">
-                <button className="Join_Create-button">
+                <button
+                    className="Join_Create-button"
+                >
                     Create a new load
                 </button>
                 {showCreateForm && <CreateLoadForm handleRemount={handleRemount} />}

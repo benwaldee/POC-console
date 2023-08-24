@@ -20,6 +20,16 @@
     align-items: center;
 }
 
+@media (max-width: 550px) {
+    .Search_search-box {
+        width: fit-content;
+        height: 100px;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+}
+
 .Search_search-label {
     font-size: 11px;
     font-family: Arial, Tahoma, Helvetica, sans-serif;
@@ -29,7 +39,7 @@
 }
 
 .Search_search-field {
-    padding: 8px 6px !important;
+    padding: 8px 6px;
     font-size: 12px;
     color: #444444;
     font-family: Arial, Tahoma, Helvetica, sans-serif;
