@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useGeneralContext } from '../../../context/GeneralContext';
 import "../../CSS/Field.css"
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
@@ -68,7 +67,7 @@ function CreateLoadForm({ handleRemount, setShowCreateForm }) {
 
         createLoad.data.preloads = nestedInfo.preloads
         createLoad.data.deliveries = nestedInfo.deliveries
-        createLoad.data.vinDeliveries = nestedInfo.deliveries
+        createLoad.data.vinDeliveries = nestedInfo.vinDeliveries
 
 
         try {
@@ -112,12 +111,12 @@ function CreateLoadForm({ handleRemount, setShowCreateForm }) {
 
             <div className='Field_create-subtitle'>Create new load</div>
             <div className='Field_create-tabs'>
-                <div className={`Field_display-button Field_create-tab-option Field_display-button-blue Field_create-tab-option-selected-${tabDisplay === "loadInfo"}`}
+                <div className={`Field_display-button Field_create-tab-option  Field_create-tab-option-selected-${tabDisplay === "loadInfo"}`}
                     onClick={() => {
                         setTabDisplay("loadInfo")
                     }}
                 >Load Info</div>
-                <div className={`Field_display-button-blue Field_create-tab-option Field_display-button Field_create-tab-option-selected-${tabDisplay === "nestedInfo"}`}
+                <div className={` Field_create-tab-option Field_display-button Field_create-tab-option-selected-${tabDisplay === "nestedInfo"}`}
                     onClick={() => {
                         setTabDisplay("nestedInfo")
                     }}
@@ -262,7 +261,7 @@ function CreateLoadForm({ handleRemount, setShowCreateForm }) {
             }
             <div className='Field_create-button-wrap'>
                 <button
-                    className='Field_create-button'
+                    className='Field_create-button Field_display-button-blue'
                     onClick={handleSubmit}
                 > Create new load</button>
                 <button

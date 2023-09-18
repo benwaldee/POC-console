@@ -120,7 +120,7 @@
 }
 
 .Field_edit_save:hover,
-.Field_create-button:hover {
+.Field_create-tab-option:hover {
     background-color: #696969;
 }
 
@@ -274,13 +274,13 @@
     height: 0px;
     width: 70px;
     margin-top: 10px;
-    border: 1px solid #4c91ca
+    background-color: #525252;
 }
 
 
 
 .Field_create-tab-option-selected-true {
-    border-bottom: 1.85px inset #525252
+    height: 2px;
 }
 
 .Field_create-button {
@@ -293,7 +293,7 @@
     align-items: center;
     color: #FFFFFF;
     font-weight: bold;
-    background-color: #525252;
+    background-color: #4c91ca;
     border-radius: 3px;
     border: none;
     cursor: pointer;

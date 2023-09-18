@@ -208,7 +208,7 @@ function VinSearch({ remountParent, handleRemount }) {
                         {matchedVins?.map((vin, index) =>
                             <div
                                 className={`HectaSearch_table-entry HectaSearch_table-entry-last-${matchedVins.length - 1 === index} Search_table-entry-clicked-${index === clickedDivIndex}`}
-                                key={vin.vinInfo.vin_number}
+                                key={vin.vinInfo.vin}
                                 onClick={() => {
                                     setClickedVin(vin)
                                     setClickedLoad(loadMap[vin.loadNum])
@@ -216,7 +216,7 @@ function VinSearch({ remountParent, handleRemount }) {
                                 }}
                                 onMouseLeave={() => { setHoveredDeleteIdx(null) }}
                             >
-                                <div className='HectaSearch_table-entry-val '>{vin.vinInfo.vin_number}</div>
+                                <div className='HectaSearch_table-entry-val '>{vin.vinInfo.vin}</div>
                                 <div className='HectaSearch_table-entry-val '>{vin.loadNum}</div>
                                 <div className='HectaSearch_table-entry-val'>{vin.vinInfo.type}</div>
                                 <div className='HectaSearch_table-entry-val'>{vin.vinInfo.color}</div>
